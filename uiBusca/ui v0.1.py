@@ -1,7 +1,7 @@
+import os
 from customtkinter import *
 from PIL import Image
 from tkcalendar import DateEntry
-
 
 # definindo funções e variáveis
 listaTipos = ["Assalto", "Homicídio", "Sonegação", "Outro"]
@@ -12,14 +12,17 @@ def procurar():
     print("Hello World")
 
 # setup das imagens
-lupa = Image.open("lupa.png")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+lupa_path = os.path.join(script_dir, "lupa.png")
+lupa = Image.open(lupa_path)
 
 # setup da janela
 window = CTk()
 window.geometry("500x400")
 window.title("Página de Busca")
 set_appearance_mode("dark")
-window.iconbitmap("logopolicia.ico")
+icon_path = os.path.join(script_dir, "logopolicia.ico")
+window.iconbitmap(icon_path)
 
 # setup do frame
 frame = CTkFrame(set_appearance_mode("dark"))
