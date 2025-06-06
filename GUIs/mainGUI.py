@@ -3,13 +3,14 @@ This code contains the GUI for the application. It uses tkinter to create a GUI 
 run each function inside the app.
 '''
 import tkinter as tk
+from tkinter import ttk  # Add this import
 import os
-import subprocess
 import kagglehub
-
+from baseimport import   dload
+# Ensure the Kaggle API is authenticated and the dataset is downloaded
 
 FILE_TO_CHECK = "NYPD_Complaint_Data_Historic.csv"
-FOLDER = os.path.dirname(os.path.abspath(__file__)) 
+FOLDER = "datasets" 
 
 def unwriting_effect(label, text, root, on_finish, delay=16):
     if text:
@@ -39,8 +40,37 @@ def check_file_and_continue(root):
         show_missing_file_screen(root)
 
 def load(root):
-    subprocess.run(["python", "baseimport.py"])
-    check_file_and_continue(root)
+    for widget in root.winfo_children():
+        widget.destroy()
+    root.configure(bg="black")
+
+    label = tk.Label(root, text="Baixando base de dados...", fg="white", bg="black", font=("Courier New", 24))
+    label.pack(pady=(100, 20))
+    style = ttk.Style()
+    style.theme_use('default')
+    style.configure("TProgressbar", troughcolor='white', background='black')  # Black indicator, white background
+
+    progress = ttk.Progressbar(root, orient="horizontal", length=400, mode="indeterminate", style="TProgressbar")
+    progress = ttk.Progressbar(root, orient="horizontal", length=400, mode="indeterminate")
+    progress.pack(pady=(0, 20))
+    status_label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 16))
+    status_label.pack()
+
+    def progress_callback(percent, message):
+        root.after(0, lambda: status_label.config(text=message))
+        root.update_idletasks()
+
+    import threading
+    def run_download():
+        progress.start(10)  # Start indeterminate animation
+        progress_callback(0, "Isso pode demorar um pouco, por favor, aguarde")
+        dload(progress_callback)
+        progress.stop()
+        progress["value"] = 100
+        progress_callback(100, "Download concluído!")
+        root.after(0, lambda: check_file_and_continue(root))
+
+    threading.Thread(target=run_download).start()
 
 def structures(root):
     for widget in root.winfo_children():
@@ -53,14 +83,14 @@ def structures(root):
     writing_effect(label, full_text, root, lambda: show_buttons(root), 16, 500)
 
     def show_buttons(root):
-        btn_texts = ["Estrutura 1", "Estrutura 2", "Estrutura 3", "Estrutura 4", "Estrutura 5"]
+        btn_texts = ["Lista Duplamente Encadeada", "Árvore B", "Tabela Hash", "Skip List", "Árvore Prefixada", "Extra - Fila com Prioridade"]
         for i, text in enumerate(btn_texts):
             btn = tk.Button(
                 root,
                 text=text,
                 font=("Courier New", 24),
-                width=20,
-                height=2,
+                width=50,
+                height=1,
                 bg="black",
                 fg="white",
                 activebackground="black",
@@ -155,7 +185,7 @@ def show_splash(root):
     def after_writing():
         root.after(1800, unwriting_effect(label, full_text, root, lambda: check_file_and_continue(root), 32))
 
-    writing_effect(label, full_text, root, after_writing, 128)
+    writing_effect(label, full_text, root, after_writing, 16)
 
 def main():
     root = tk.Tk()
