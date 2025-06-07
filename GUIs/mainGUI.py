@@ -1,16 +1,23 @@
 '''
 This code contains the GUI for the application. It uses tkinter to create a GUI that allows the user to
-run each function inside the app.
+run each of the other function inside the app.
 '''
 import tkinter as tk
-from tkinter import ttk  # Add this import
+from tkinter import ttk 
+from tkinter import messagebox
 import os
 import kagglehub
-from baseimport import   dload
-# Ensure the Kaggle API is authenticated and the dataset is downloaded
+from baseimport import dload
+import subprocess
 
 FILE_TO_CHECK = "NYPD_Complaint_Data_Historic.csv"
 FOLDER = "datasets" 
+
+"""
+Prompt for buttons customization:
+I'd like all the buttons have a black colored background
+with their text color being white as well as their borders
+"""
 
 def unwriting_effect(label, text, root, on_finish, delay=16):
     if text:
@@ -32,12 +39,54 @@ def writing_effect(label, text, root, on_finish, delay=16, start_delay=1000):
     else:
         step(1)
 
-def check_file_and_continue(root):
-    file_path = os.path.join(FOLDER, FILE_TO_CHECK)
-    if os.path.exists(file_path):
-        structures(root)
-    else:
-        show_missing_file_screen(root)
+def benchmarks(root):
+    for widget in root.winfo_children():
+        widget.destroy()
+    root.configure(bg="black")
+
+def prechoice(root):
+    for widget in root.winfo_children():
+        widget.destroy()
+    root.configure(bg="black")
+    full_text = "\nO que gostaria de fazer?"
+    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32))
+    label.pack(pady=(200, 100))  # Add top padding, small bottom padding
+
+    writing_effect(label, full_text, root, lambda: show_button(root, label, full_text),16, 500)
+
+    def show_button(root, label, full_text):
+        btn_frame = tk.Frame(root, bg="black")
+        btn_frame.pack(pady=(0, 20))
+    
+        btn_yes = tk.Button(
+        btn_frame,
+        text="Operações Individuais",
+        font=("Courier New", 24),
+        bg="black",
+        fg="white",
+        activebackground="black",
+        activeforeground="white",
+        highlightbackground="white", 
+        highlightcolor="white",
+        bd=2,
+        command=lambda: unwriting_effect(label, full_text, root, lambda: structures(root))
+        )
+        btn_yes.pack(side="left", padx=(0, 40))
+    
+        btn_no = tk.Button(
+        btn_frame,
+        text="Testes de Benchmark",
+        font=("Courier New", 24),
+        bg="black",
+        fg="white",
+        activebackground="black",
+        activeforeground="white",
+        highlightbackground="white",
+        highlightcolor="white",
+        bd=2,
+        command=lambda: unwriting_effect(label, full_text, root, lambda: benchmarks(root))
+        )
+        btn_no.pack(side="left")
 
 def load(root):
     for widget in root.winfo_children():
@@ -72,6 +121,47 @@ def load(root):
 
     threading.Thread(target=run_download).start()
 
+def structure(root, structure_name):
+    if structure_name == "Lista Duplamente Encadeada":
+        # Path to your C++ executable (adjust as needed)
+        exe_path = os.path.abspath(os.path.join("build", "nycd.exe"))
+        if not os.path.exists(exe_path):
+            messagebox.showerror("Erro", f"Executável não encontrado: {exe_path}")
+            return
+        try:
+            result = subprocess.run([exe_path], capture_output=True, text=True)
+            messagebox.showinfo("Saída do C++", result.stdout)
+        except Exception as e:
+            messagebox.showerror("Erro", f"Erro ao executar o código C++: {e}")
+    for widget in root.winfo_children():
+        widget.destroy()
+    root.configure(bg="black")
+    full_text = "Estrutura Escolhida: " + structure_name + "\n\nO que deseja fazer?"
+    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 28))
+    label.pack(pady=(50, 50))  # Add top padding, small bottom padding
+
+    writing_effect(label, full_text, root, lambda: show_buttons(root), 16, 500)
+
+    def show_buttons(root):
+        btn_texts = ["Inserir", "Remover", "Buscar", "Filtrar e Ordenar", "Cálculo Estátístico", "Simulação"]
+        for i, text in enumerate(btn_texts):
+            btn = tk.Button(
+                root,
+                text=text,
+                font=("Courier New", 24),
+                width=50,
+                height=1,
+                bg="black",
+                fg="white",
+                activebackground="black",
+                activeforeground="white",
+                highlightbackground="white",  # border color on some platforms
+                highlightcolor="white",
+                bd=2,  # border width
+                command=lambda t=text: unwriting_effect(label, full_text, root, lambda: structure(root, t))
+            )
+            btn.pack(pady=20)
+
 def structures(root):
     for widget in root.winfo_children():
         widget.destroy()
@@ -97,7 +187,8 @@ def structures(root):
                 activeforeground="white",
                 highlightbackground="white",  # border color on some platforms
                 highlightcolor="white",
-                bd=2  # border width
+                bd=2,  # border width
+                command=lambda t=text: unwriting_effect(label, full_text, root, lambda: structure(root, t))
                 )
             btn.pack(pady=20)
 
@@ -173,6 +264,13 @@ def show_missing_file_screen(root):
         command=lambda: unwriting_effect(label, full_text, root, lambda: failscreen(root))
         )
         btn_no.pack(side="left")
+
+def check_file_and_continue(root):
+    file_path = os.path.join(FOLDER, FILE_TO_CHECK)
+    if os.path.exists(file_path):
+        prechoice(root)
+    else:
+        show_missing_file_screen(root)
 
 def show_splash(root):
     root.configure(bg="black")
