@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\nycd.dir/objects.a
+C:\msys64\ucrt64\bin\ar.exe qc CMakeFiles\nycd.dir/objects.a @CMakeFiles\nycd.dir\objects1.rsp
+C:\msys64\ucrt64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\nycd.dir/objects.a -Wl,--no-whole-archive -o nycd.exe -Wl,--out-implib,libnycd.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\nycd.dir\linkLibs.rsp

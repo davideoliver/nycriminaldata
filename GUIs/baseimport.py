@@ -19,7 +19,7 @@ def dload(progress_callback=None):
         basing on the progress of the api.dataset_download_files function in baseimport.py
         """
         if progress_callback:
-            progress_callback(0, "Isso pode demorar um tempo...")
+            progress_callback(0, "Isso pode demorar um tempo, por favor, aguarde")
         api.dataset_download_files(dataset, path="datasets", unzip=True)
         if progress_callback:
             progress_callback(100, "Download concluído!")

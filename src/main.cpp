@@ -9,7 +9,6 @@ and basing on the header doubly_linkedlist.h and doubly_linkedlist.cpp
 #include <string>
 #include "doubly_linkedlist.h"
 #include <cctype>
-#include <filesystem>
 
 bool isInteger(const std::string& s) {
     if (s.empty()) return false;
@@ -82,7 +81,7 @@ ComplaintData parseCSVLine(const std::string& line) {
 
 int main() {
     DoublyLinkedList list;
-    std::ifstream file("../datasets/NYPD_Complaint_Data_Historic.csv");
+    std::ifstream file("../../../datasets/NYPD_Complaint_Data_Historic.csv");
     // Check if the file opened successfully
     if (!file.is_open()) {
         // Prompt: Substitute the if with a exception
@@ -97,7 +96,6 @@ int main() {
         ComplaintData data = parseCSVLine(line);
         list.append(data);
     }
-    file.close();
-    std::cout << "Loaded " << list.size() << " complaints into the list." << std::endl;
-    return 0;
+    std::cout << list.size() << " Reclamações foram adicionadas a lista." << std::endl;
+    file.close(); 
 }
