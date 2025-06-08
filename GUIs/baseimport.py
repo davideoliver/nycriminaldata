@@ -4,8 +4,6 @@ import zipfile
 from kaggle.api.kaggle_api_extended import KaggleApi
 
 def dload(progress_callback=None):
-
-    print("baseimport.py loaded")
     api = KaggleApi()
     api.authenticate()
     dataset = "aniket0712/nypd-complaint-data-historic"
