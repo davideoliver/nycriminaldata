@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata
+CMAKE_SOURCE_DIR = C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC
+CMAKE_BINARY_DIR = C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -77,7 +77,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
-	"C:\Program Files\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/david/OneDrive/Documents/GitHub/nycriminaldata/out/build/GCC/CPackSourceConfig.cmake
+	"C:\Program Files\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/bruno/OneDrive/Documentos/GitHub/nycriminaldata/out/build/gcc/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -116,9 +116,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -546,6 +546,30 @@ src/doubly_linkedlist.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.s
 .PHONY : src/doubly_linkedlist.cpp.s
 
+src/hash_table.obj: src/hash_table.cpp.obj
+.PHONY : src/hash_table.obj
+
+# target to build an object file
+src/hash_table.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/hash_table.cpp.obj
+.PHONY : src/hash_table.cpp.obj
+
+src/hash_table.i: src/hash_table.cpp.i
+.PHONY : src/hash_table.i
+
+# target to preprocess a source file
+src/hash_table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/hash_table.cpp.i
+.PHONY : src/hash_table.cpp.i
+
+src/hash_table.s: src/hash_table.cpp.s
+.PHONY : src/hash_table.s
+
+# target to generate assembly for a file
+src/hash_table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/hash_table.cpp.s
+.PHONY : src/hash_table.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -613,6 +637,9 @@ help:
 	@echo ... src/doubly_linkedlist.obj
 	@echo ... src/doubly_linkedlist.i
 	@echo ... src/doubly_linkedlist.s
+	@echo ... src/hash_table.obj
+	@echo ... src/hash_table.i
+	@echo ... src/hash_table.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
