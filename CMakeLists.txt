@@ -5,6 +5,7 @@ add_executable(nycd
 src/main.cpp
 src/doubly_linkedlist.cpp
 src/hash_table.cpp
+src/b_tree.cpp
 )
 
 include(CTest)

@@ -10,6 +10,7 @@ and basing on the header doubly_linkedlist.h and doubly_linkedlist.cpp
 #include "doubly_linkedlist.h"
 #include <cctype>
 #include "hash_table.h"
+#include "b_tree.h"
 
 int i = 0;
 
@@ -85,6 +86,7 @@ ComplaintData parseCSVLine(const std::string& line) {
 int main() {
     DoublyLinkedList list;
     HashTable hashTable;
+    BTree btree(3);
     std::ifstream file("../../../datasets/NYPD_Complaint_Data_Historic.csv");
     // Check if the file opened successfully
     if (!file.is_open()) {
@@ -99,13 +101,17 @@ int main() {
     while (std::getline(file, line)) {
         ComplaintData data = parseCSVLine(line);
         list.append(data);
-        /*
         hashTable.insert(data);
+        btree.insert(data);
+
+        if (i < 5) {
+        std::cout << "\n[Arvore B apos inserir CMPLNT_NUM = " << data.CMPLNT_NUM << "]\n";
+        btree.print();
+        }
         i++;
         if(i == 5){
             break;
         }
-            */// eu usei esse código pra testar o hashing, se for testar outra estrutura so mudar o "hashTable" dali
     }
     std::cout << list.size() << " Reclamações foram adicionadas a lista." << std::endl;
 
