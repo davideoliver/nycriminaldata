@@ -50,7 +50,7 @@ def main():
         btn_height = max(2, int(med * 1.5 // 10))
         entry_height = max(1, int(base * 0.012))
         bar_length = max(200, int(w * 0.4))
-        wrap = max(200, int(w * 0.95))
+        wrap = max(200, int(w * 0.95))  # Use wrap for label wraplength
         # Dynamic vertical padding for cut/optype screens
         root.dynamic_pady_label = int(h * 0.18)
         root.dynamic_pady_btn = int(h * 0.05)
@@ -61,11 +61,11 @@ def main():
         if isinstance(widget, tk.Label):
             text = widget.cget("text")
             if len(text) > 30:
-                widget.config(font=("Courier New", med), wraplength=wrap)
+                widget.config(font=("Courier New", med), wraplength=wrap, justify="center")
             elif len(text) > 10:
-                widget.config(font=("Courier New", big), wraplength=wrap)
+                widget.config(font=("Courier New", big), wraplength=wrap, justify="center")
             else:
-                widget.config(font=("Courier New", big, "bold"), wraplength=wrap)
+                widget.config(font=("Courier New", big, "bold"), wraplength=wrap, justify="center")
         elif isinstance(widget, tk.Button):
             widget.config(font=("Courier New", med), height=btn_height)
         elif isinstance(widget, tk.Entry):
@@ -91,7 +91,6 @@ def show_splash(root):
     full_text = "NYCRIMINALDATA"
     full_text2 = "Aperte ESC para sair do programa\ne DEL para excluir a base de dados\n a qualquer momento"
 
-    # Use a frame with grid to keep label1 centered at all times
     splash_frame = tk.Frame(root, bg="black")
     splash_frame.pack(expand=True, fill="both")
 
@@ -100,10 +99,12 @@ def show_splash(root):
     splash_frame.grid_rowconfigure(2, weight=1)
     splash_frame.grid_columnconfigure(0, weight=1)
 
-    label1 = tk.Label(splash_frame, text="", fg="white", bg="black", font=("Courier New", 64))
+    # Set wraplength to 95% of window width
+    wrap = max(200, int(root.winfo_width() * 0.95))
+    label1 = tk.Label(splash_frame, text="", fg="white", bg="black", font=("Courier New", 64), wraplength=wrap, justify="center")
     label1.grid(row=1, column=0, pady=(100, 10), sticky="n")
 
-    label2 = tk.Label(splash_frame, text="", fg="white", bg="black", font=("Courier New", 24))
+    label2 = tk.Label(splash_frame, text="", fg="white", bg="black", font=("Courier New", 24), wraplength=wrap, justify="center")
     label2.grid(row=2, column=0, pady=(0, 100), sticky="n")
 
     def after_label1():
@@ -135,7 +136,8 @@ def show_missing_file_screen(root):
         widget.destroy()
     root.configure(bg="black")
     full_text = "A base de dados não foi encontrada,\n gostaria de baixa-la pela internet?"
-    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32))
+    wrap = max(200, int(root.winfo_width() * 0.95))
+    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32), wraplength=wrap, justify="center")
     label.pack(pady=(200, 100), expand=True, fill="both")  # Add top padding, small bottom padding
 
     writing_effect(label, full_text, root, lambda: show_confirmation_buttons(root, label, full_text), 16, 500)
@@ -181,8 +183,8 @@ def load(root):
     for widget in root.winfo_children():
         widget.destroy()
     root.configure(bg="black")
-
-    label = tk.Label(root, text="Baixando base de dados...", fg="white", bg="black", font=("Courier New", 24))
+    wrap = max(200, int(root.winfo_width() * 0.95))
+    label = tk.Label(root, text="Baixando base de dados...", fg="white", bg="black", font=("Courier New", 24), wraplength=wrap, justify="center")
     label.pack(pady=(100, 20), expand=True, fill="both")
     style = ttk.Style()
     style.theme_use('default')
@@ -190,7 +192,7 @@ def load(root):
 
     progress = ttk.Progressbar(root, orient="horizontal", length=400, mode="indeterminate", style="TProgressbar")
     progress.pack(pady=(0, 20), expand=True, fill="x")
-    status_label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 16))
+    status_label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 16), wraplength=wrap, justify="center")
     status_label.pack(expand=True, fill="both")
 
     def progress_callback(percent, message):
@@ -213,7 +215,8 @@ def failscreen(root):
         widget.destroy()
     root.configure(bg="black")
     full_text = "A base de dados não foi encontrada,\n baixe-a manualmente ou opte por Sim na tela inicial."
-    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32))
+    wrap = max(200, int(root.winfo_width() * 0.95))
+    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32), wraplength=wrap, justify="center")
     label.pack(pady=(200, 100), expand=True, fill="both")  # Add top padding, small bottom padding
 
     writing_effect(label, full_text, root, lambda: show_button(root, label, full_text),16, 500)
@@ -244,11 +247,8 @@ def cut(root):
     for widget in root.winfo_children():
         widget.destroy()
     root.configure(bg="black")
-
-    #Prompt: The show_spalsh label last letter stays on screen while the pandas dataframe is being create
-    #  for the cut function, I'd like it dissapears and a loading bar be added to this process
-    # Show loading label and progress bar
-    loading_label = tk.Label(root, text="Carregando dados...", fg="white", bg="black", font=("Courier New", 32))
+    wrap = max(200, int(root.winfo_width() * 0.95))
+    loading_label = tk.Label(root, text="Carregando dados...", fg="white", bg="black", font=("Courier New", 32), wraplength=wrap, justify="center")
     loading_label.pack(pady=(root.dynamic_pady_label if hasattr(root, "dynamic_pady_label") else 200, 20), expand=True, fill="both")
     style = ttk.Style()
     style.theme_use('default')
@@ -265,7 +265,7 @@ def cut(root):
         
         # Now show the next screen
         full_text = f"\nO dataset possuí {df.shape[0]} dados, muitos dados podem\ntornar processos lentos e estruturas custosas\nVocê gostaria de reduzir esses dados aleatoriamente\n para uma melhora no desempenho?"
-        label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 24))
+        label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 24), wraplength=wrap, justify="center")
         label.pack(pady=(root.dynamic_pady_label if hasattr(root, "dynamic_pady_label") else 200, root.dynamic_pady_btn if hasattr(root, "dynamic_pady_btn") else 100), expand=True, fill="both")
         writing_effect(label, full_text, root, lambda: show_button(root, label, full_text, df), 16, 500)
 
@@ -309,13 +309,11 @@ def cut(root):
     root.event_generate("<<UpdateFonts>>")
 
 def reduce_data(root, df):
-    # Prompt I'd like to create two widgets where the user can write a number (only numbers) to be read
-    #  and used as a variable in the df.sample of reduced_data
     for widget in root.winfo_children():
         widget.destroy()
     root.configure(bg="black")
-
-    label = tk.Label(root, text="Digite a fração (0-1) que restará e uma semente para aleatoriedade:", fg="white", bg="black", font=("Courier New", 24))
+    wrap = max(200, int(root.winfo_width() * 0.95))
+    label = tk.Label(root, text="Digite a fração (0-1) que restará e uma semente para aleatoriedade:", fg="white", bg="black", font=("Courier New", 24), wraplength=wrap, justify="center")
     label.pack(pady=(100, 20), expand=True, fill="both")
 
     entry_frame = tk.Frame(root, bg="black")
@@ -337,11 +335,11 @@ def reduce_data(root, df):
     seed_entry.insert(0, "1")
     seed_entry.grid(row=0, column=3, padx=10, sticky="ew")
 
-    error_label = tk.Label(root, text="", fg="red", bg="black", font=("Courier New", 16))
+    error_label = tk.Label(root, text="", fg="red", bg="black", font=("Courier New", 16), wraplength=wrap, justify="center")
     error_label.pack(expand=True, fill="both")
 
     # Progress bar for sampling
-    progress_label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 16))
+    progress_label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 16), wraplength=wrap, justify="center")
     progress = ttk.Progressbar(root, orient="horizontal", length=400, mode="indeterminate", style="TProgressbar")
 
     def on_reduce():
@@ -397,7 +395,8 @@ def optype(root):
         widget.destroy()
     root.configure(bg="black")
     full_text = "\nO que gostaria de fazer?"
-    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32))
+    wrap = max(200, int(root.winfo_width() * 0.95))
+    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32), wraplength=wrap, justify="center")
     label.pack(pady=(root.dynamic_pady_label if hasattr(root, "dynamic_pady_label") else 200, root.dynamic_pady_btn if hasattr(root, "dynamic_pady_btn") else 100), expand=True, fill="both")  # Add top padding, small bottom padding
 
     writing_effect(label, full_text, root, lambda: show_button(root, label, full_text),16, 500)

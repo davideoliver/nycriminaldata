@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata
+CMAKE_SOURCE_DIR = C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc
+CMAKE_BINARY_DIR = C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -77,7 +77,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Run CPack packaging tool for source..."
-	"C:\Program Files\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/bruno/OneDrive/Documentos/GitHub/nycriminaldata/out/build/gcc/CPackSourceConfig.cmake
+	"C:\Program Files\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/david/OneDrive/Documents/GitHub/nycriminaldata/out/build/GCC/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -116,9 +116,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -522,77 +522,77 @@ ContinuousSubmit/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ContinuousSubmit.dir\build.make CMakeFiles/ContinuousSubmit.dir/build
 .PHONY : ContinuousSubmit/fast
 
-src/doubly_linkedlist.obj: src/doubly_linkedlist.cpp.obj
-.PHONY : src/doubly_linkedlist.obj
+structures/doubly_linkedlist.obj: structures/doubly_linkedlist.cpp.obj
+.PHONY : structures/doubly_linkedlist.obj
 
 # target to build an object file
-src/doubly_linkedlist.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.obj
-.PHONY : src/doubly_linkedlist.cpp.obj
+structures/doubly_linkedlist.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj
+.PHONY : structures/doubly_linkedlist.cpp.obj
 
-src/doubly_linkedlist.i: src/doubly_linkedlist.cpp.i
-.PHONY : src/doubly_linkedlist.i
+structures/doubly_linkedlist.i: structures/doubly_linkedlist.cpp.i
+.PHONY : structures/doubly_linkedlist.i
 
 # target to preprocess a source file
-src/doubly_linkedlist.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.i
-.PHONY : src/doubly_linkedlist.cpp.i
+structures/doubly_linkedlist.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.i
+.PHONY : structures/doubly_linkedlist.cpp.i
 
-src/doubly_linkedlist.s: src/doubly_linkedlist.cpp.s
-.PHONY : src/doubly_linkedlist.s
+structures/doubly_linkedlist.s: structures/doubly_linkedlist.cpp.s
+.PHONY : structures/doubly_linkedlist.s
 
 # target to generate assembly for a file
-src/doubly_linkedlist.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.s
-.PHONY : src/doubly_linkedlist.cpp.s
+structures/doubly_linkedlist.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.s
+.PHONY : structures/doubly_linkedlist.cpp.s
 
-src/hash_table.obj: src/hash_table.cpp.obj
-.PHONY : src/hash_table.obj
+structures/hash_table.obj: structures/hash_table.cpp.obj
+.PHONY : structures/hash_table.obj
 
 # target to build an object file
-src/hash_table.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/hash_table.cpp.obj
-.PHONY : src/hash_table.cpp.obj
+structures/hash_table.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/hash_table.cpp.obj
+.PHONY : structures/hash_table.cpp.obj
 
-src/hash_table.i: src/hash_table.cpp.i
-.PHONY : src/hash_table.i
+structures/hash_table.i: structures/hash_table.cpp.i
+.PHONY : structures/hash_table.i
 
 # target to preprocess a source file
-src/hash_table.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/hash_table.cpp.i
-.PHONY : src/hash_table.cpp.i
+structures/hash_table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/hash_table.cpp.i
+.PHONY : structures/hash_table.cpp.i
 
-src/hash_table.s: src/hash_table.cpp.s
-.PHONY : src/hash_table.s
+structures/hash_table.s: structures/hash_table.cpp.s
+.PHONY : structures/hash_table.s
 
 # target to generate assembly for a file
-src/hash_table.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/hash_table.cpp.s
-.PHONY : src/hash_table.cpp.s
+structures/hash_table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/hash_table.cpp.s
+.PHONY : structures/hash_table.cpp.s
 
-src/main.obj: src/main.cpp.obj
-.PHONY : src/main.obj
+structures/main.obj: structures/main.cpp.obj
+.PHONY : structures/main.obj
 
 # target to build an object file
-src/main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/main.cpp.obj
-.PHONY : src/main.cpp.obj
+structures/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/main.cpp.obj
+.PHONY : structures/main.cpp.obj
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+structures/main.i: structures/main.cpp.i
+.PHONY : structures/main.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+structures/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/main.cpp.i
+.PHONY : structures/main.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+structures/main.s: structures/main.cpp.s
+.PHONY : structures/main.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+structures/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/main.cpp.s
+.PHONY : structures/main.cpp.s
 
 # Help Target
 help:
@@ -634,15 +634,15 @@ help:
 	@echo ... NightlyTest
 	@echo ... NightlyUpdate
 	@echo ... nycd
-	@echo ... src/doubly_linkedlist.obj
-	@echo ... src/doubly_linkedlist.i
-	@echo ... src/doubly_linkedlist.s
-	@echo ... src/hash_table.obj
-	@echo ... src/hash_table.i
-	@echo ... src/hash_table.s
-	@echo ... src/main.obj
-	@echo ... src/main.i
-	@echo ... src/main.s
+	@echo ... structures/doubly_linkedlist.obj
+	@echo ... structures/doubly_linkedlist.i
+	@echo ... structures/doubly_linkedlist.s
+	@echo ... structures/hash_table.obj
+	@echo ... structures/hash_table.i
+	@echo ... structures/hash_table.s
+	@echo ... structures/main.obj
+	@echo ... structures/main.i
+	@echo ... structures/main.s
 .PHONY : help
 
 

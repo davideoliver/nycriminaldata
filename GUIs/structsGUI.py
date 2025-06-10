@@ -1,4 +1,5 @@
 import os
+from textwrap import wrap
 import threading
 import subprocess
 import tkinter as tk
@@ -11,7 +12,8 @@ def structures(root):
         widget.destroy()
     root.configure(bg="black")
     full_text = "Escolha a estrutura de dados que deseja utilizar:"
-    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32))
+    wrap = max(200, int(root.winfo_width() * 0.95))
+    label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 32), wraplength=wrap, justify="center")
     label.pack(pady=(50, 50))  # Add top padding, small bottom padding
 
     writing_effect(label, full_text, root, lambda: show_buttons(root), 16, 500)
@@ -51,7 +53,7 @@ def structures(root):
             set_widget_font(widget, big, med, btn_height, wrap)
     def set_widget_font(widget, big, med, btn_height, wrap):
         if isinstance(widget, tk.Label):
-            widget.config(font=("Courier New", big), wraplength=wrap)
+            widget.config(font=("Courier New", big), wraplength=wrap, justify="center")
         elif isinstance(widget, tk.Button):
             widget.config(font=("Courier New", med), height=btn_height)
         elif isinstance(widget, tk.Frame):
@@ -92,7 +94,7 @@ def structure(root, structure_name):
 
     def set_widget_font(widget, big, med, btn_height, wrap):
         if isinstance(widget, tk.Label):
-            widget.config(font=("Courier New", big), wraplength=wrap)
+            widget.config(font=("Courier New", big), wraplength=wrap, justify="center")
         elif isinstance(widget, tk.Button):
             widget.config(font=("Courier New", med), height=btn_height)
         elif isinstance(widget, tk.Frame):
@@ -103,14 +105,15 @@ def structure(root, structure_name):
         for widget in root.winfo_children():
             widget.destroy()
         full_text = "Estrutura Escolhida: " + structure_name + "\n\nO que deseja fazer?"
-        label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 28))
+        wrap = max(200, int(root.winfo_width() * 0.95))
+        label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 28), wraplength=wrap, justify="center")
         label.pack(pady=(50, 50), expand=True, fill="both")
-        writing_effect(label, full_text, root, lambda: show_buttons(root), 16, 500)
+
+        btn_frame = tk.Frame(root, bg="black")
+        btn_frame.pack(expand=True, fill="both")
 
         def show_buttons(root):
             btn_texts = ["Inserir", "Remover", "Buscar", "Filtrar e Ordenar", "Cálculo Estátistico", "Simulação"]
-            btn_frame = tk.Frame(root, bg="black")
-            btn_frame.pack(expand=True, fill="both")
             for i, text in enumerate(btn_texts):
                 btn_frame.rowconfigure(i, weight=1)
             btn_frame.columnconfigure(0, weight=1)
@@ -129,10 +132,21 @@ def structure(root, structure_name):
                     command=lambda t=text: lambda: [disable_all_buttons(root), unwriting_effect(label, full_text, root, lambda: structure(root, t))]
                 )
                 btn.grid(row=i, column=0, pady=10, sticky="nsew")
+        # Prompt: I'd like the pady between the label and buttons be dinamic resized with the window
+        def update_dynamic_pady(event=None):
+            h = root.winfo_height()
+            # Calculate dynamic pady as a fraction of window height, min 20, max 150
+            pady = max(20, min(150, int(h * 0.08)))
+            label.pack_configure(pady=(pady, pady))
+
+        writing_effect(label, full_text, root, lambda: show_buttons(root), 16, 500)
         root.bind("<Configure>", update_fonts)
+        root.bind("<Configure>", update_dynamic_pady)
+        root.after(0, update_dynamic_pady)
 
     if structure_name == "Lista Duplamente Encadeada":
-        loading_label = tk.Label(root, text="Carregando...", fg="white", bg="black", font=("Courier New", 32))
+        wrap = max(200, int(root.winfo_width() * 0.95))  # Ensure wrap is defined here
+        loading_label = tk.Label(root, text="Carregando...", fg="white", bg="black", font=("Courier New", 32), wraplength=wrap, justify="center")
         loading_label.pack(pady=(100, 100), expand=True, fill="both")
         threading.Thread(target=run_cpp_and_show_result, daemon=True).start()
         root.after(0, update_fonts)
