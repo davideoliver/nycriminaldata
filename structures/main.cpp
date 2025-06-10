@@ -10,10 +10,16 @@ and basing on the header doubly_linkedlist.h and doubly_linkedlist.cpp
 #include "doubly_linkedlist.h"
 #include <cctype>
 #include "hash_table.h"
+<<<<<<< Updated upstream
 #include "b_tree.h"
 #include "skip_list.h"
 
 int i = 0;
+=======
+#include <thread>
+#include <chrono>
+#include <filesystem>
+>>>>>>> Stashed changes
 
 bool isInteger(const std::string& s) {
     if (s.empty()) return false;
@@ -85,6 +91,10 @@ ComplaintData parseCSVLine(const std::string& line) {
 }
 
 int main() {
+
+    std::string linedt; //Variable to hold each line of the dataset
+    std::string lineda; // Variable to hold each line of the communication file
+    
     DoublyLinkedList list;
     HashTable hashTable;
     BTree btree(3);
@@ -96,20 +106,13 @@ int main() {
     // Check if the dataset opened successfully
     if (!dataset.is_open()) {
         // Prompt: Substitute the if with a exception
-        throw std::runtime_error("Failed to open the dataset file! Check if it exists and is accessible.");
+        std::cout << "Failed to open the dataset file! Check if it exists and is accessible.";
     }
 
-    std::ifstream data("communication.data");
-    // Check if the file opened successfully
-    if (!dataset.is_open()) {
-        // Prompt: Substitute the if with a exception
-        throw std::runtime_error("Failed to open the communcation file! Check if it exists and is accessible.");
-    }
-
-    std::string line;
     // Skip header line
-    std::getline(dataset, line);
+    std::getline(dataset, linedt);
 
+<<<<<<< Updated upstream
     // Read each line and parse it into ComplaintData
     while (std::getline(dataset, line)) {
         ComplaintData data = parseCSVLine(line);
@@ -125,10 +128,89 @@ int main() {
         if(i == 5){
           break;
         }
+=======
+    // Use the same path as Python (relative to where Python launches the process)
+    std::string comm_path = "datasets/communication.data";
+    std::cout << "C++ communication file path: " << std::filesystem::absolute(comm_path) << std::endl;
+
+    // Open communication file in read/write mode and keep it open
+    std::fstream commFile(comm_path, std::ios::in | std::ios::out);
+    if (!commFile.is_open()) {
+        std::cout << "Failed to open the communication file! Check if it exists and is accessible.";
+        return 1;
+>>>>>>> Stashed changes
     }
 
-    //Finished reading and creating the data structures
-    dataset.close(); 
-
+    if (std::getline(commFile, lineda)) {
+        int command = 0;
+        try {
+            command = std::stoi(lineda);
+        } catch (const std::invalid_argument& e) {
+            std::cout << "Invalid command! Structure not listed" << lineda << std::endl;
+        } catch (const std::out_of_range& e) {
+            std::cout << "Command out of range! Structure not listed" << lineda << std::endl;
+        }
+        switch(command) {
+        case 0:
+            while (std::getline(dataset, linedt)) {
+                ComplaintData data = parseCSVLine(linedt);
+                list.append(data);
+            }
+            break;
+        case 1:
+            while (std::getline(dataset, linedt)) {
+                ComplaintData data = parseCSVLine(linedt);
+                hashTable.insert(data);
+            }
+            break;
+        default:
+            std::cout << "Erro de Execução " << lineda << std::endl;
+        }
+        //Finished reading and creating the data structure
     }
+    dataset.close();
+
+<<<<<<< Updated upstream
+    }
+=======
+    // Move file pointer to beginning and overwrite with 0
+    commFile.clear();
+    commFile.seekp(0, std::ios::beg);
+    commFile << "0";
+    commFile.flush();
+
+    // Loop to constantly read the file and verify the number inside it
+    while (true) {
+        commFile.clear();
+        commFile.seekg(0, std::ios::beg);
+        std::string commandLine;
+        if (std::getline(commFile, commandLine)) {
+            int commandValue = 0;
+            try {
+                commandValue = std::stoi(commandLine);
+            } catch (...) {
+                commandValue = -1;
+            }
+            std::cout << "Current command value: " << commandValue << std::endl;
+            if (commandValue != 0) {
+                switch (commandValue) {
+                    case 11:
+                        std::cout << "List size: " << list.size() << std::endl;
+                        // Move file pointer to beginning and overwrite with -11
+                        commFile.clear();
+                        commFile.seekp(0, std::ios::beg);
+                        commFile << "-11";
+                        commFile.flush();
+                        break;
+                    default:
+                        std::cout << "Invalid command! Operation not Listened: " << commandValue << std::endl;
+                        break;
+                }
+            }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+
+    commFile.close();
+}
+>>>>>>> Stashed changes
 }

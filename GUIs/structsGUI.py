@@ -93,7 +93,11 @@ def structure(root, structure_name):
                     with open(comm_file, "r") as f:
                         content = f.read()
                     if content.strip() == expected_value:
+<<<<<<< Updated upstream
                         root.after(0, show_next_screen(structure_type))
+=======
+                        root.after(0, show_next_screen)
+>>>>>>> Stashed changes
                         return
                 except Exception:
                     pass
