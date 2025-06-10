@@ -13,6 +13,19 @@
                 "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
                 "CMAKE_BUILD_TYPE": "Debug"
             }
+        },
+        {
+            "name": "GCC 6.3.0 mingw32",
+            "displayName": "GCC 6.3.0 mingw32",
+            "description": "Usando compiladores: C = C:\\MinGW\\bin\\gcc.exe, CXX = C:\\MinGW\\bin\\g++.exe",
+            "generator": "MinGW Makefiles",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/MinGW/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/MinGW/bin/g++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
         }
     ]
 }

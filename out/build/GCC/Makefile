@@ -522,37 +522,32 @@ ContinuousSubmit/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ContinuousSubmit.dir\build.make CMakeFiles/ContinuousSubmit.dir/build
 .PHONY : ContinuousSubmit/fast
 
-<<<<<<< HEAD
-src/b_tree.obj: src/b_tree.cpp.obj
+structures/b_tree.obj: src/b_tree.cpp.obj
 .PHONY : src/b_tree.obj
 
 # target to build an object file
-src/b_tree.cpp.obj:
+structures/b_tree.cpp.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/b_tree.cpp.obj
 .PHONY : src/b_tree.cpp.obj
 
-src/b_tree.i: src/b_tree.cpp.i
+structures/b_tree.i: src/b_tree.cpp.i
 .PHONY : src/b_tree.i
 
 # target to preprocess a source file
-src/b_tree.cpp.i:
+structures/b_tree.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/b_tree.cpp.i
 .PHONY : src/b_tree.cpp.i
 
-src/b_tree.s: src/b_tree.cpp.s
+structures/b_tree.s: src/b_tree.cpp.s
 .PHONY : src/b_tree.s
 
 # target to generate assembly for a file
-src/b_tree.cpp.s:
+structures/b_tree.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/b_tree.cpp.s
 .PHONY : src/b_tree.cpp.s
 
-src/doubly_linkedlist.obj: src/doubly_linkedlist.cpp.obj
+structures/doubly_linkedlist.obj: src/doubly_linkedlist.cpp.obj
 .PHONY : src/doubly_linkedlist.obj
-=======
-structures/doubly_linkedlist.obj: structures/doubly_linkedlist.cpp.obj
-.PHONY : structures/doubly_linkedlist.obj
->>>>>>> 5c07f74449572929e4e3a2738c6473fc19b79260
 
 # target to build an object file
 structures/doubly_linkedlist.cpp.obj:
