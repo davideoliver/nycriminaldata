@@ -11,6 +11,7 @@ and basing on the header doubly_linkedlist.h and doubly_linkedlist.cpp
 #include <cctype>
 #include "hash_table.h"
 #include "b_tree.h"
+#include "skip_list.h"
 
 int i = 0;
 
@@ -87,6 +88,7 @@ int main() {
     DoublyLinkedList list;
     HashTable hashTable;
     BTree btree(3);
+    SkipList skipList(16, 0.75f);
     std::ifstream file("../../../datasets/NYPD_Complaint_Data_Historic.csv");
     // Check if the file opened successfully
     if (!file.is_open()) {
@@ -103,14 +105,14 @@ int main() {
         list.append(data);
         hashTable.insert(data);
         btree.insert(data);
-
+        skipList.insert(data);
         if (i < 5) {
-        std::cout << "\n[Arvore B apos inserir CMPLNT_NUM = " << data.CMPLNT_NUM << "]\n";
-        btree.print();
-        }
+         std::cout << "\n[Skip List apos inserir CMPLNT_NUM = " << data.CMPLNT_NUM << "]\n";
+         skipList.print();
+        }   
         i++;
         if(i == 5){
-            break;
+          break;
         }
     }
     std::cout << list.size() << " Reclamações foram adicionadas a lista." << std::endl;

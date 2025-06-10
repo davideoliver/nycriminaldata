@@ -161,4 +161,5 @@ CMakeFiles/nycd.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.1.0/bits/allocated_ptr.h \
  C:/msys64/mingw64/include/c++/15.1.0/ext/aligned_buffer.h \
  C:/msys64/mingw64/include/c++/15.1.0/bits/list.tcc \
- C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\b_tree.h
+ C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\b_tree.h \
+ C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\skip_list.h

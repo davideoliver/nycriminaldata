@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/nycd.dir/src/hash_table.cpp.obj.d"
   "CMakeFiles/nycd.dir/src/main.cpp.obj"
   "CMakeFiles/nycd.dir/src/main.cpp.obj.d"
+  "CMakeFiles/nycd.dir/src/skip_list.cpp.obj"
+  "CMakeFiles/nycd.dir/src/skip_list.cpp.obj.d"
   "libnycd.dll.a"
   "nycd.exe"
   "nycd.exe.manifest"

@@ -618,6 +618,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/skip_list.obj: src/skip_list.cpp.obj
+.PHONY : src/skip_list.obj
+
+# target to build an object file
+src/skip_list.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/skip_list.cpp.obj
+.PHONY : src/skip_list.cpp.obj
+
+src/skip_list.i: src/skip_list.cpp.i
+.PHONY : src/skip_list.i
+
+# target to preprocess a source file
+src/skip_list.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/skip_list.cpp.i
+.PHONY : src/skip_list.cpp.i
+
+src/skip_list.s: src/skip_list.cpp.s
+.PHONY : src/skip_list.s
+
+# target to generate assembly for a file
+src/skip_list.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/skip_list.cpp.s
+.PHONY : src/skip_list.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -670,6 +694,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/skip_list.obj
+	@echo ... src/skip_list.i
+	@echo ... src/skip_list.s
 .PHONY : help
 
 
