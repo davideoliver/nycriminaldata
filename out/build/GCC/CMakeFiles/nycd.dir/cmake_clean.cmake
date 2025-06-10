@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/nycd.dir/structures/b_tree.cpp.obj"
+  "CMakeFiles/nycd.dir/structures/b_tree.cpp.obj.d"
   "CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj"
   "CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj.d"
   "CMakeFiles/nycd.dir/structures/hash_table.cpp.obj"
@@ -7,8 +9,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/nycd.dir/structures/main.cpp.obj.d"
   "CMakeFiles/nycd.dir/structures/skip_list.cpp.obj"
   "CMakeFiles/nycd.dir/structures/skip_list.cpp.obj.d"
-  "CMakeFiles/nycd.dir/structures/b_tree.cpp.obj"
-  "CMakeFiles/nycd.dir/structures/b_tree.cpp.obj.d"
   "libnycd.dll.a"
   "nycd.exe"
   "nycd.exe.manifest"

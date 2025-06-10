@@ -10,28 +10,22 @@ and basing on the header doubly_linkedlist.h and doubly_linkedlist.cpp
 #include "doubly_linkedlist.h"
 #include <cctype>
 #include "hash_table.h"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 #include "b_tree.h"
 #include "skip_list.h"
 
 int i = 0;
-=======
+
 #include <thread>
 #include <chrono>
 #include <filesystem>
->>>>>>> Stashed changes
-=======
+
 #include <thread>
 #include <chrono>
 #include <filesystem>
->>>>>>> Stashed changes
-=======
+
 #include <thread>
 #include <chrono>
 #include <filesystem>
->>>>>>> Stashed changes
 
 bool isInteger(const std::string& s) {
     if (s.empty()) return false;
@@ -111,25 +105,21 @@ int main() {
     HashTable hashTable;
     BTree btree(3);
     SkipList skipList(16, 0.75f);
-    std::ifstream file("../../../datasets/NYPD_Complaint_Data_Historic.csv");
-    // Check if the file opened successfully
-    if (!file.is_open()) {
     std::ifstream dataset("../../../datasets/NYPD_Complaint_Data_Historic.csv");
-    // Check if the dataset opened successfully
-    if (!dataset.is_open()) {
-        // Prompt: Substitute the if with a exception
+    // Check if the file opened successfully
+    if (!dataset.is_open()){
+        std::ifstream dataset("../../../datasets/NYPD_Complaint_Data_Historic.csv");
+    }
+        // Check if the dataset opened successfully
+    if (!dataset.is_open()){ // Prompt: Substitute the if with a exception 
         std::cout << "Failed to open the dataset file! Check if it exists and is accessible.";
     }
-
     // Skip header line
     std::getline(dataset, linedt);
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+    /*
     // Read each line and parse it into ComplaintData
-    while (std::getline(dataset, line)) {
-        ComplaintData data = parseCSVLine(line);
+    while (std::getline(dataset, linedt)) {
+        ComplaintData data = parseCSVLine(linedt);
         list.append(data);
         hashTable.insert(data);
         btree.insert(data);
@@ -142,11 +132,7 @@ int main() {
         if(i == 5){
           break;
         }
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+*/
     // Use the same path as Python (relative to where Python launches the process)
     std::string comm_path = "datasets/communication.data";
     std::cout << "C++ communication file path: " << std::filesystem::absolute(comm_path) << std::endl;
@@ -156,13 +142,6 @@ int main() {
     if (!commFile.is_open()) {
         std::cout << "Failed to open the communication file! Check if it exists and is accessible.";
         return 1;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 
     if (std::getline(commFile, lineda)) {
@@ -194,15 +173,6 @@ int main() {
     }
     dataset.close();
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    }
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     // Move file pointer to beginning and overwrite with 0
     commFile.clear();
     commFile.seekp(0, std::ios::beg);
@@ -237,16 +207,9 @@ int main() {
                         break;
                 }
             }
-        std::this_thread::sleep_for(std::chrono::seconds(1));
         }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
 
     commFile.close();
-}
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }

@@ -93,19 +93,8 @@ def structure(root, structure_name):
                     with open(comm_file, "r") as f:
                         content = f.read()
                     if content.strip() == expected_value:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
                         root.after(0, show_next_screen(structure_type))
-=======
-                        root.after(0, show_next_screen)
->>>>>>> Stashed changes
-=======
-                        root.after(0, show_next_screen)
->>>>>>> Stashed changes
-=======
-                        root.after(0, show_next_screen)
->>>>>>> Stashed changes
                         return
                 except Exception:
                     pass
@@ -148,11 +137,12 @@ def structure(root, structure_name):
 
         def show_buttons(root):
             btn_texts = ["Inserir", "Remover", "Buscar", "Filtrar e Ordenar", "Cálculo Estátistico", "Simulação"]
+            label_ref = label  # capture label in closure
             for i, text in enumerate(btn_texts):
                 btn_frame.rowconfigure(i, weight=1)
                 btn_frame.columnconfigure(0, weight=1)
             for i, text in enumerate(btn_texts):
-                def on_button_click(t=text, idx=i):
+                def on_button_click(t=text, idx=i, label_ref=label_ref):
                     # Write structure_code + (idx+1) to communication.data
                     comm_file = "datasets/communication.data"
                     try:
@@ -162,7 +152,9 @@ def structure(root, structure_name):
                         root.after(0, lambda: messagebox.showerror("Erro", f"Erro ao escrever em {comm_file}: {e}"))
                         return
                     disable_all_buttons(root)
-                    unwriting_effect(label, full_text, root, lambda: structure(root, t))
+                    # Only call unwriting_effect if label_ref still exists
+                    if label_ref.winfo_exists():
+                        unwriting_effect(label_ref, full_text, root, lambda: structure(root, t))
                 btn = tk.Button(
                     btn_frame,
                     text=text,
@@ -179,10 +171,15 @@ def structure(root, structure_name):
                 btn.grid(row=i, column=0, pady=10, sticky="nsew")
         # Prompt: I'd like the pady between the label and buttons be dinamic resized with the window
         def update_dynamic_pady(event=None):
+            if not label.winfo_exists():
+                return
             h = root.winfo_height()
             # Calculate dynamic pady as a fraction of window height, min 20, max 150
             pady = max(20, min(150, int(h * 0.08)))
-            label.pack_configure(pady=(pady, pady))
+            try:
+                label.pack_configure(pady=(pady, pady))
+            except tk.TclError:
+                pass
 
         writing_effect(label, full_text, root, lambda: show_buttons(root), 16, 500)
         root.bind("<Configure>", update_fonts)

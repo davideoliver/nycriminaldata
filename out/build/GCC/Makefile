@@ -522,32 +522,32 @@ ContinuousSubmit/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ContinuousSubmit.dir\build.make CMakeFiles/ContinuousSubmit.dir/build
 .PHONY : ContinuousSubmit/fast
 
-structures/b_tree.obj: src/b_tree.cpp.obj
-.PHONY : src/b_tree.obj
+structures/b_tree.obj: structures/b_tree.cpp.obj
+.PHONY : structures/b_tree.obj
 
 # target to build an object file
 structures/b_tree.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/b_tree.cpp.obj
-.PHONY : src/b_tree.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/b_tree.cpp.obj
+.PHONY : structures/b_tree.cpp.obj
 
-structures/b_tree.i: src/b_tree.cpp.i
-.PHONY : src/b_tree.i
+structures/b_tree.i: structures/b_tree.cpp.i
+.PHONY : structures/b_tree.i
 
 # target to preprocess a source file
 structures/b_tree.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/b_tree.cpp.i
-.PHONY : src/b_tree.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/b_tree.cpp.i
+.PHONY : structures/b_tree.cpp.i
 
-structures/b_tree.s: src/b_tree.cpp.s
-.PHONY : src/b_tree.s
+structures/b_tree.s: structures/b_tree.cpp.s
+.PHONY : structures/b_tree.s
 
 # target to generate assembly for a file
 structures/b_tree.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/b_tree.cpp.s
-.PHONY : src/b_tree.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/b_tree.cpp.s
+.PHONY : structures/b_tree.cpp.s
 
-structures/doubly_linkedlist.obj: src/doubly_linkedlist.cpp.obj
-.PHONY : src/doubly_linkedlist.obj
+structures/doubly_linkedlist.obj: structures/doubly_linkedlist.cpp.obj
+.PHONY : structures/doubly_linkedlist.obj
 
 # target to build an object file
 structures/doubly_linkedlist.cpp.obj:
@@ -618,29 +618,29 @@ structures/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/main.cpp.s
 .PHONY : structures/main.cpp.s
 
-src/skip_list.obj: src/skip_list.cpp.obj
-.PHONY : src/skip_list.obj
+structures/skip_list.obj: structures/skip_list.cpp.obj
+.PHONY : structures/skip_list.obj
 
 # target to build an object file
-src/skip_list.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/skip_list.cpp.obj
-.PHONY : src/skip_list.cpp.obj
+structures/skip_list.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/skip_list.cpp.obj
+.PHONY : structures/skip_list.cpp.obj
 
-src/skip_list.i: src/skip_list.cpp.i
-.PHONY : src/skip_list.i
+structures/skip_list.i: structures/skip_list.cpp.i
+.PHONY : structures/skip_list.i
 
 # target to preprocess a source file
-src/skip_list.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/skip_list.cpp.i
-.PHONY : src/skip_list.cpp.i
+structures/skip_list.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/skip_list.cpp.i
+.PHONY : structures/skip_list.cpp.i
 
-src/skip_list.s: src/skip_list.cpp.s
-.PHONY : src/skip_list.s
+structures/skip_list.s: structures/skip_list.cpp.s
+.PHONY : structures/skip_list.s
 
 # target to generate assembly for a file
-src/skip_list.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/src/skip_list.cpp.s
-.PHONY : src/skip_list.cpp.s
+structures/skip_list.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\nycd.dir\build.make CMakeFiles/nycd.dir/structures/skip_list.cpp.s
+.PHONY : structures/skip_list.cpp.s
 
 # Help Target
 help:
@@ -682,23 +682,9 @@ help:
 	@echo ... NightlyTest
 	@echo ... NightlyUpdate
 	@echo ... nycd
-<<<<<<< HEAD
-	@echo ... src/b_tree.obj
-	@echo ... src/b_tree.i
-	@echo ... src/b_tree.s
-	@echo ... src/doubly_linkedlist.obj
-	@echo ... src/doubly_linkedlist.i
-	@echo ... src/doubly_linkedlist.s
-	@echo ... src/hash_table.obj
-	@echo ... src/hash_table.i
-	@echo ... src/hash_table.s
-	@echo ... src/main.obj
-	@echo ... src/main.i
-	@echo ... src/main.s
-	@echo ... src/skip_list.obj
-	@echo ... src/skip_list.i
-	@echo ... src/skip_list.s
-=======
+	@echo ... structures/b_tree.obj
+	@echo ... structures/b_tree.i
+	@echo ... structures/b_tree.s
 	@echo ... structures/doubly_linkedlist.obj
 	@echo ... structures/doubly_linkedlist.i
 	@echo ... structures/doubly_linkedlist.s
@@ -708,7 +694,9 @@ help:
 	@echo ... structures/main.obj
 	@echo ... structures/main.i
 	@echo ... structures/main.s
->>>>>>> 5c07f74449572929e4e3a2738c6473fc19b79260
+	@echo ... structures/skip_list.obj
+	@echo ... structures/skip_list.i
+	@echo ... structures/skip_list.s
 .PHONY : help
 
 
