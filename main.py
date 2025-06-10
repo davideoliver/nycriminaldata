@@ -3,13 +3,13 @@ import sys
 import os
 import csv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'structures')))
-from hash_table import ComplaintRegistry
+from hash_table import hashTable
 from complaint_data import ComplaintData
 
 # Caminho para o dataset
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complaint_Data_Historic.csv')
 
-registry = ComplaintRegistry()
+hash = hashTable()
 
 def safe_int(val):
     try:
@@ -66,11 +66,11 @@ if os.path.exists(DATASET_PATH):
                 VIC_RACE=row.get('VIC_RACE', ''),
                 VIC_SEX=row.get('VIC_SEX', '')
             )
-            registry.insert(complaint)
+            hash.insert(complaint)
 else:
     print(f"[ERRO] Dataset não encontrado em {DATASET_PATH}")
 
-registry.print_all()
+hash.print_all()
 
 
 

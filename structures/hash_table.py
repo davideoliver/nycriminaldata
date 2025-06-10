@@ -1,6 +1,6 @@
 from complaint_data import ComplaintData
 
-class ComplaintRegistry:
+class hashTable:
     def __init__(self):
         self.data = {}
 
