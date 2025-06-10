@@ -18,23 +18,47 @@ def structures(root):
 
     def show_buttons(root):
         btn_texts = ["Lista Duplamente Encadeada", "Árvore B", "Tabela Hash", "Skip List", "Árvore Prefixada", "Extra - Fila com Prioridade"]
+        btn_frame = tk.Frame(root, bg="black")
+        btn_frame.pack(expand=True, fill="both")
+        for i, text in enumerate(btn_texts):
+            btn_frame.rowconfigure(i, weight=1)
+        btn_frame.columnconfigure(0, weight=1)
         for i, text in enumerate(btn_texts):
             btn = tk.Button(
-                root,
+                btn_frame,
                 text=text,
                 font=("Courier New", 24),
-                width=50,
-                height=1,
                 bg="black",
                 fg="white",
                 activebackground="black",
                 activeforeground="white",
-                highlightbackground="white",  # border color on some platforms
+                highlightbackground="white",
                 highlightcolor="white",
-                bd=2,  # border width
+                bd=2,
                 command=lambda t=text: unwriting_effect(label, full_text, root, lambda: structure(root, t))
                 )
-            btn.pack(pady=20)
+            btn.grid(row=i, column=0, pady=10, sticky="nsew")
+
+    def update_fonts(event=None):
+        w, h = root.winfo_width(), root.winfo_height()
+        base = min(w, h)
+        big = max(12, int(base * 0.05))
+        med = max(10, int(base * 0.03))
+        # Button height: at least 1.5x font size, minimum 2
+        btn_height = max(2, int(med * 1.5 // 10))
+        wrap = max(200, int(w * 0.95))
+        for widget in root.winfo_children():
+            set_widget_font(widget, big, med, btn_height, wrap)
+    def set_widget_font(widget, big, med, btn_height, wrap):
+        if isinstance(widget, tk.Label):
+            widget.config(font=("Courier New", big), wraplength=wrap)
+        elif isinstance(widget, tk.Button):
+            widget.config(font=("Courier New", med), height=btn_height)
+        elif isinstance(widget, tk.Frame):
+            for child in widget.winfo_children():
+                set_widget_font(child, big, med, btn_height, wrap)
+    root.bind("<Configure>", update_fonts)
+    root.after(0, update_fonts)
 
 def structure(root, structure_name):
     #Prompt: I'd like to create a condition, where if the structure_name is "Lista Duplamente Encadeada",
@@ -56,23 +80,45 @@ def structure(root, structure_name):
         # After showing result, continue to next screen
         root.after(0, lambda: show_next_screen())
 
+    def update_fonts(event=None):
+        w, h = root.winfo_width(), root.winfo_height()
+        base = min(w, h)
+        big = max(12, int(base * 0.05))
+        med = max(10, int(base * 0.03))
+        btn_height = max(2, int(med * 1.5 // 10))
+        wrap = max(200, int(w * 0.95))
+        for widget in root.winfo_children():
+            set_widget_font(widget, big, med, btn_height, wrap)
+
+    def set_widget_font(widget, big, med, btn_height, wrap):
+        if isinstance(widget, tk.Label):
+            widget.config(font=("Courier New", big), wraplength=wrap)
+        elif isinstance(widget, tk.Button):
+            widget.config(font=("Courier New", med), height=btn_height)
+        elif isinstance(widget, tk.Frame):
+            for child in widget.winfo_children():
+                set_widget_font(child, big, med, btn_height, wrap)
+
     def show_next_screen():
         for widget in root.winfo_children():
             widget.destroy()
         full_text = "Estrutura Escolhida: " + structure_name + "\n\nO que deseja fazer?"
         label = tk.Label(root, text="", fg="white", bg="black", font=("Courier New", 28))
-        label.pack(pady=(50, 50))
+        label.pack(pady=(50, 50), expand=True, fill="both")
         writing_effect(label, full_text, root, lambda: show_buttons(root), 16, 500)
 
         def show_buttons(root):
-            btn_texts = ["Inserir", "Remover", "Buscar", "Filtrar e Ordenar", "Cálculo Estátístico", "Simulação"]
+            btn_texts = ["Inserir", "Remover", "Buscar", "Filtrar e Ordenar", "Cálculo Estátistico", "Simulação"]
+            btn_frame = tk.Frame(root, bg="black")
+            btn_frame.pack(expand=True, fill="both")
+            for i, text in enumerate(btn_texts):
+                btn_frame.rowconfigure(i, weight=1)
+            btn_frame.columnconfigure(0, weight=1)
             for i, text in enumerate(btn_texts):
                 btn = tk.Button(
-                    root,
+                    btn_frame,
                     text=text,
                     font=("Courier New", 24),
-                    width=50,
-                    height=1,
                     bg="black",
                     fg="white",
                     activebackground="black",
@@ -82,11 +128,14 @@ def structure(root, structure_name):
                     bd=2,
                     command=lambda t=text: lambda: [disable_all_buttons(root), unwriting_effect(label, full_text, root, lambda: structure(root, t))]
                 )
-                btn.pack(pady=20)
+                btn.grid(row=i, column=0, pady=10, sticky="nsew")
+        root.bind("<Configure>", update_fonts)
 
     if structure_name == "Lista Duplamente Encadeada":
         loading_label = tk.Label(root, text="Carregando...", fg="white", bg="black", font=("Courier New", 32))
-        loading_label.pack(pady=(100, 100))
+        loading_label.pack(pady=(100, 100), expand=True, fill="both")
         threading.Thread(target=run_cpp_and_show_result, daemon=True).start()
+        root.after(0, update_fonts)
     else:
         show_next_screen()
+        root.after(0, update_fonts)
