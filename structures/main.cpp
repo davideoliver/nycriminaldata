@@ -11,10 +11,16 @@ and basing on the header doubly_linkedlist.h and doubly_linkedlist.cpp
 #include <cctype>
 #include "hash_table.h"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #include "b_tree.h"
 #include "skip_list.h"
 
 int i = 0;
+=======
+#include <thread>
+#include <chrono>
+#include <filesystem>
+>>>>>>> Stashed changes
 =======
 #include <thread>
 #include <chrono>
@@ -113,6 +119,7 @@ int main() {
     std::getline(dataset, linedt);
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Read each line and parse it into ComplaintData
     while (std::getline(dataset, line)) {
         ComplaintData data = parseCSVLine(line);
@@ -129,6 +136,8 @@ int main() {
           break;
         }
 =======
+=======
+>>>>>>> Stashed changes
     // Use the same path as Python (relative to where Python launches the process)
     std::string comm_path = "datasets/communication.data";
     std::cout << "C++ communication file path: " << std::filesystem::absolute(comm_path) << std::endl;
@@ -138,6 +147,9 @@ int main() {
     if (!commFile.is_open()) {
         std::cout << "Failed to open the communication file! Check if it exists and is accessible.";
         return 1;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 
@@ -171,8 +183,11 @@ int main() {
     dataset.close();
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     }
 =======
+=======
+>>>>>>> Stashed changes
     // Move file pointer to beginning and overwrite with 0
     commFile.clear();
     commFile.seekp(0, std::ios::beg);
@@ -212,5 +227,8 @@ int main() {
 
     commFile.close();
 }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
