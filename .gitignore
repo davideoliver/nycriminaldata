@@ -1,3 +1,4 @@
-datasets/NYPD_Complaint_Data_Historic.csv
-out
-GUIs/__pycache__
+/datasets/NYPD_Complaint_Data_Historic.csv
+/out
+/GUIs/__pycache__
+/out

@@ -69,18 +69,40 @@ def structure(root, structure_name):
         widget.destroy()
     root.configure(bg="black")
 
-    def run_cpp_and_show_result():
+    def exCstructure(structure_type):
+        # Write the structure_type number to communication.data
+        comm_file = "datasets/communication.data"
+        try:
+            with open(comm_file, "w") as f:
+                f.write(str(structure_type))
+        except Exception as e:
+            root.after(0, lambda: messagebox.showerror("Erro", f"Erro ao escrever em {comm_file}: {e}"))
+            return
         exe_path = os.path.abspath(os.path.join("out", "build", "GCC", "nycd.exe"))
         if not os.path.exists(exe_path):
             root.after(0, lambda: messagebox.showerror("Erro", f"Executável não encontrado: {exe_path}"))
             return
-        try:
-            result = subprocess.run([exe_path], capture_output=True, text=True)
-            root.after(0, lambda: messagebox.showinfo("Saída do C++", result.stdout))
-        except Exception as e:
-            root.after(0, lambda: messagebox.showerror("Erro", f"Erro ao executar o código C++: {e}"))
-        # After showing result, continue to next screen
-        root.after(0, lambda: show_next_screen())
+        def run_and_wait_for_signal():
+            import time
+            # Start the C++ process (non-blocking)
+            proc = subprocess.Popen([exe_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            comm_file = "datasets/communication.data"
+            expected_value = "0"
+            for _ in range(300):  # Wait up to 60 seconds (300 * 0.2)
+                try:
+                    with open(comm_file, "r") as f:
+                        content = f.read()
+                    if content.strip() == expected_value:
+                        root.after(0, show_next_screen(structure_type))
+                        return
+                except Exception:
+                    pass
+                # Do NOT terminate the process, just check if it exited
+                time.sleep(0.2)
+            # If not detected after timeout, still proceed (fail-safe)
+            root.after(0, show_next_screen)
+
+        threading.Thread(target=run_and_wait_for_signal, daemon=True).start()
 
     def update_fonts(event=None):
         w, h = root.winfo_width(), root.winfo_height()
@@ -101,7 +123,7 @@ def structure(root, structure_name):
             for child in widget.winfo_children():
                 set_widget_font(child, big, med, btn_height, wrap)
 
-    def show_next_screen():
+    def show_next_screen(structure_code):
         for widget in root.winfo_children():
             widget.destroy()
         full_text = "Estrutura Escolhida: " + structure_name + "\n\nO que deseja fazer?"
@@ -116,8 +138,19 @@ def structure(root, structure_name):
             btn_texts = ["Inserir", "Remover", "Buscar", "Filtrar e Ordenar", "Cálculo Estátistico", "Simulação"]
             for i, text in enumerate(btn_texts):
                 btn_frame.rowconfigure(i, weight=1)
-            btn_frame.columnconfigure(0, weight=1)
+                btn_frame.columnconfigure(0, weight=1)
             for i, text in enumerate(btn_texts):
+                def on_button_click(t=text, idx=i):
+                    # Write structure_code + (idx+1) to communication.data
+                    comm_file = "datasets/communication.data"
+                    try:
+                        with open(comm_file, "w") as f:
+                            f.write(str(structure_code) + str(idx + 1))
+                    except Exception as e:
+                        root.after(0, lambda: messagebox.showerror("Erro", f"Erro ao escrever em {comm_file}: {e}"))
+                        return
+                    disable_all_buttons(root)
+                    unwriting_effect(label, full_text, root, lambda: structure(root, t))
                 btn = tk.Button(
                     btn_frame,
                     text=text,
@@ -129,7 +162,7 @@ def structure(root, structure_name):
                     highlightbackground="white",
                     highlightcolor="white",
                     bd=2,
-                    command=lambda t=text: lambda: [disable_all_buttons(root), unwriting_effect(label, full_text, root, lambda: structure(root, t))]
+                    command=on_button_click
                 )
                 btn.grid(row=i, column=0, pady=10, sticky="nsew")
         # Prompt: I'd like the pady between the label and buttons be dinamic resized with the window
@@ -144,12 +177,17 @@ def structure(root, structure_name):
         root.bind("<Configure>", update_dynamic_pady)
         root.after(0, update_dynamic_pady)
 
-    if structure_name == "Lista Duplamente Encadeada":
-        wrap = max(200, int(root.winfo_width() * 0.95))  # Ensure wrap is defined here
+    structure_map = {
+        "Lista Duplamente Encadeada": 1,
+        "Árvore B": 2,
+        "Tabela Hash": 3,
+        "Skip List": 4,
+        "Árvore Prefixada": 5,
+        "Extra - Fila com Prioridade": 6
+    }
+    if structure_name in structure_map:
+        wrap = max(200, int(root.winfo_width() * 0.95))
         loading_label = tk.Label(root, text="Carregando...", fg="white", bg="black", font=("Courier New", 32), wraplength=wrap, justify="center")
         loading_label.pack(pady=(100, 100), expand=True, fill="both")
-        threading.Thread(target=run_cpp_and_show_result, daemon=True).start()
-        root.after(0, update_fonts)
-    else:
-        show_next_screen()
+        threading.Thread(target=lambda: exCstructure(structure_map[structure_name]), daemon=True).start()
         root.after(0, update_fonts)
