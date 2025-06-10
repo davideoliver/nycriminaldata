@@ -3,6 +3,7 @@
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 CMakeFiles/nycd.dir/src/b_tree.cpp.obj: C:/Users/bruno/OneDrive/Documentos/GitHub/nycriminaldata/src/b_tree.cpp \
   C:/msys64/mingw64/include/_mingw.h \
   C:/msys64/mingw64/include/_mingw_mac.h \
@@ -1237,6 +1238,8 @@ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.1.0/include/xmmintrin.h:
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj: C:/Users/david/OneDrive/Documents/GitHub/nycriminaldata/structures/doubly_linkedlist.cpp \
   C:/msys64/ucrt64/include/_mingw.h \
   C:/msys64/ucrt64/include/_mingw_mac.h \
@@ -2122,6 +2125,9 @@ C:/msys64/ucrt64/include/stdint.h:
 
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

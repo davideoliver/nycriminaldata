@@ -95,7 +95,11 @@ def structure(root, structure_name):
                     if content.strip() == expected_value:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         root.after(0, show_next_screen(structure_type))
+=======
+                        root.after(0, show_next_screen)
+>>>>>>> Stashed changes
 =======
                         root.after(0, show_next_screen)
 >>>>>>> Stashed changes
