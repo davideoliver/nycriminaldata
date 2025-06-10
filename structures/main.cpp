@@ -13,8 +13,6 @@ and basing on the header doubly_linkedlist.h and doubly_linkedlist.cpp
 #include "b_tree.h"
 #include "skip_list.h"
 
-int i = 0;
-
 bool isInteger(const std::string& s) {
     if (s.empty()) return false;
     size_t i = 0;
@@ -87,23 +85,38 @@ ComplaintData parseCSVLine(const std::string& line) {
 int main() {
     DoublyLinkedList list;
     HashTable hashTable;
+<<<<<<< HEAD:src/main.cpp
     BTree btree(3);
     SkipList skipList(16, 0.75f);
     std::ifstream file("../../../datasets/NYPD_Complaint_Data_Historic.csv");
     // Check if the file opened successfully
     if (!file.is_open()) {
+=======
+    std::ifstream dataset("../../../datasets/NYPD_Complaint_Data_Historic.csv");
+    // Check if the dataset opened successfully
+    if (!dataset.is_open()) {
+>>>>>>> 5c07f74449572929e4e3a2738c6473fc19b79260:structures/main.cpp
         // Prompt: Substitute the if with a exception
-        throw std::runtime_error("Failed to open file!");
+        throw std::runtime_error("Failed to open the dataset file! Check if it exists and is accessible.");
     }
+
+    std::ifstream data("communication.data");
+    // Check if the file opened successfully
+    if (!dataset.is_open()) {
+        // Prompt: Substitute the if with a exception
+        throw std::runtime_error("Failed to open the communcation file! Check if it exists and is accessible.");
+    }
+
     std::string line;
     // Skip header line
-    std::getline(file, line);
+    std::getline(dataset, line);
 
     // Read each line and parse it into ComplaintData
-    while (std::getline(file, line)) {
+    while (std::getline(dataset, line)) {
         ComplaintData data = parseCSVLine(line);
         list.append(data);
         hashTable.insert(data);
+<<<<<<< HEAD:src/main.cpp
         btree.insert(data);
         skipList.insert(data);
         if (i < 5) {
@@ -114,9 +127,12 @@ int main() {
         if(i == 5){
           break;
         }
+=======
+>>>>>>> 5c07f74449572929e4e3a2738c6473fc19b79260:structures/main.cpp
     }
-    std::cout << list.size() << " Reclamações foram adicionadas a lista." << std::endl;
 
-    hashTable.print();
-    file.close(); 
+    //Finished reading and creating the data structures
+    dataset.close(); 
+
+
 }

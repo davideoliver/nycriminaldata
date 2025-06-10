@@ -1,5 +1,7 @@
 import tkinter as tk
 
+
+# Prompt: I'd like the label, vanish with a effect of unwriting it
 def unwriting_effect(label, text, root, on_finish, delay=8):
     if text:
         label.config(text=text)
@@ -8,6 +10,8 @@ def unwriting_effect(label, text, root, on_finish, delay=8):
         label.config(text="")  # Ensure the label is cleared
         on_finish()
 
+# Prompt: I'd like a similar function of unwriting, but it actually write the labels
+# + I'd like a delay be added before each writing effect
 def writing_effect(label, text, root, on_finish, delay=16, start_delay=500):
     def step(i):
         label.config(text=text[:i])
@@ -22,7 +26,7 @@ def writing_effect(label, text, root, on_finish, delay=16, start_delay=500):
         step(1)
 
 
-# Prompt:   I'd like any button can be clicked just one time in this code
+# Prompt: I'd like any button can be clicked just one time in this code
 def disable_all_buttons(root):
     for widget in root.winfo_children():
         # Prompt: I'd like the disable_all_buttons, also works on tk.Entry

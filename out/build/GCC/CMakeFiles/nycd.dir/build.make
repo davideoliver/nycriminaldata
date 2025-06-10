@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata
+CMAKE_SOURCE_DIR = C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc
+CMAKE_BINARY_DIR = C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC
 
 # Include any dependencies generated for this target.
 include CMakeFiles/nycd.dir/depend.make
@@ -71,47 +71,47 @@ include CMakeFiles/nycd.dir/flags.make
 CMakeFiles/nycd.dir/codegen:
 .PHONY : CMakeFiles/nycd.dir/codegen
 
-CMakeFiles/nycd.dir/src/main.cpp.obj: CMakeFiles/nycd.dir/flags.make
-CMakeFiles/nycd.dir/src/main.cpp.obj: C:/Users/bruno/OneDrive/Documentos/GitHub/nycriminaldata/src/main.cpp
-CMakeFiles/nycd.dir/src/main.cpp.obj: CMakeFiles/nycd.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/nycd.dir/src/main.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nycd.dir/src/main.cpp.obj -MF CMakeFiles\nycd.dir\src\main.cpp.obj.d -o CMakeFiles\nycd.dir\src\main.cpp.obj -c C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\main.cpp
+CMakeFiles/nycd.dir/structures/main.cpp.obj: CMakeFiles/nycd.dir/flags.make
+CMakeFiles/nycd.dir/structures/main.cpp.obj: C:/Users/david/OneDrive/Documents/GitHub/nycriminaldata/structures/main.cpp
+CMakeFiles/nycd.dir/structures/main.cpp.obj: CMakeFiles/nycd.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/nycd.dir/structures/main.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nycd.dir/structures/main.cpp.obj -MF CMakeFiles\nycd.dir\structures\main.cpp.obj.d -o CMakeFiles\nycd.dir\structures\main.cpp.obj -c C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\main.cpp
 
-CMakeFiles/nycd.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nycd.dir/src/main.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\main.cpp > CMakeFiles\nycd.dir\src\main.cpp.i
+CMakeFiles/nycd.dir/structures/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nycd.dir/structures/main.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\main.cpp > CMakeFiles\nycd.dir\structures\main.cpp.i
 
-CMakeFiles/nycd.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nycd.dir/src/main.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\main.cpp -o CMakeFiles\nycd.dir\src\main.cpp.s
+CMakeFiles/nycd.dir/structures/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nycd.dir/structures/main.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\main.cpp -o CMakeFiles\nycd.dir\structures\main.cpp.s
 
-CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.obj: CMakeFiles/nycd.dir/flags.make
-CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.obj: C:/Users/bruno/OneDrive/Documentos/GitHub/nycriminaldata/src/doubly_linkedlist.cpp
-CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.obj: CMakeFiles/nycd.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.obj -MF CMakeFiles\nycd.dir\src\doubly_linkedlist.cpp.obj.d -o CMakeFiles\nycd.dir\src\doubly_linkedlist.cpp.obj -c C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\doubly_linkedlist.cpp
+CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj: CMakeFiles/nycd.dir/flags.make
+CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj: C:/Users/david/OneDrive/Documents/GitHub/nycriminaldata/structures/doubly_linkedlist.cpp
+CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj: CMakeFiles/nycd.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.obj -MF CMakeFiles\nycd.dir\structures\doubly_linkedlist.cpp.obj.d -o CMakeFiles\nycd.dir\structures\doubly_linkedlist.cpp.obj -c C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\doubly_linkedlist.cpp
 
-CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\doubly_linkedlist.cpp > CMakeFiles\nycd.dir\src\doubly_linkedlist.cpp.i
+CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\doubly_linkedlist.cpp > CMakeFiles\nycd.dir\structures\doubly_linkedlist.cpp.i
 
-CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\doubly_linkedlist.cpp -o CMakeFiles\nycd.dir\src\doubly_linkedlist.cpp.s
+CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nycd.dir/structures/doubly_linkedlist.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\doubly_linkedlist.cpp -o CMakeFiles\nycd.dir\structures\doubly_linkedlist.cpp.s
 
-CMakeFiles/nycd.dir/src/hash_table.cpp.obj: CMakeFiles/nycd.dir/flags.make
-CMakeFiles/nycd.dir/src/hash_table.cpp.obj: C:/Users/bruno/OneDrive/Documentos/GitHub/nycriminaldata/src/hash_table.cpp
-CMakeFiles/nycd.dir/src/hash_table.cpp.obj: CMakeFiles/nycd.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/nycd.dir/src/hash_table.cpp.obj"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nycd.dir/src/hash_table.cpp.obj -MF CMakeFiles\nycd.dir\src\hash_table.cpp.obj.d -o CMakeFiles\nycd.dir\src\hash_table.cpp.obj -c C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\hash_table.cpp
+CMakeFiles/nycd.dir/structures/hash_table.cpp.obj: CMakeFiles/nycd.dir/flags.make
+CMakeFiles/nycd.dir/structures/hash_table.cpp.obj: C:/Users/david/OneDrive/Documents/GitHub/nycriminaldata/structures/hash_table.cpp
+CMakeFiles/nycd.dir/structures/hash_table.cpp.obj: CMakeFiles/nycd.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/nycd.dir/structures/hash_table.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/nycd.dir/structures/hash_table.cpp.obj -MF CMakeFiles\nycd.dir\structures\hash_table.cpp.obj.d -o CMakeFiles\nycd.dir\structures\hash_table.cpp.obj -c C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\hash_table.cpp
 
-CMakeFiles/nycd.dir/src/hash_table.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nycd.dir/src/hash_table.cpp.i"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\hash_table.cpp > CMakeFiles\nycd.dir\src\hash_table.cpp.i
+CMakeFiles/nycd.dir/structures/hash_table.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/nycd.dir/structures/hash_table.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\hash_table.cpp > CMakeFiles\nycd.dir\structures\hash_table.cpp.i
 
-CMakeFiles/nycd.dir/src/hash_table.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nycd.dir/src/hash_table.cpp.s"
-	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\src\hash_table.cpp -o CMakeFiles\nycd.dir\src\hash_table.cpp.s
+CMakeFiles/nycd.dir/structures/hash_table.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/nycd.dir/structures/hash_table.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\structures\hash_table.cpp -o CMakeFiles\nycd.dir\structures\hash_table.cpp.s
 
 CMakeFiles/nycd.dir/src/b_tree.cpp.obj: CMakeFiles/nycd.dir/flags.make
 CMakeFiles/nycd.dir/src/b_tree.cpp.obj: C:/Users/bruno/OneDrive/Documentos/GitHub/nycriminaldata/src/b_tree.cpp
@@ -145,9 +145,7 @@ CMakeFiles/nycd.dir/src/skip_list.cpp.s: cmake_force
 nycd_OBJECTS = \
 "CMakeFiles/nycd.dir/src/main.cpp.obj" \
 "CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.obj" \
-"CMakeFiles/nycd.dir/src/hash_table.cpp.obj" \
-"CMakeFiles/nycd.dir/src/b_tree.cpp.obj" \
-"CMakeFiles/nycd.dir/src/skip_list.cpp.obj"
+"CMakeFiles/nycd.dir/src/hash_table.cpp.obj"
 
 # External object files for target nycd
 nycd_EXTERNAL_OBJECTS =
@@ -155,13 +153,11 @@ nycd_EXTERNAL_OBJECTS =
 nycd.exe: CMakeFiles/nycd.dir/src/main.cpp.obj
 nycd.exe: CMakeFiles/nycd.dir/src/doubly_linkedlist.cpp.obj
 nycd.exe: CMakeFiles/nycd.dir/src/hash_table.cpp.obj
-nycd.exe: CMakeFiles/nycd.dir/src/b_tree.cpp.obj
-nycd.exe: CMakeFiles/nycd.dir/src/skip_list.cpp.obj
 nycd.exe: CMakeFiles/nycd.dir/build.make
 nycd.exe: CMakeFiles/nycd.dir/linkLibs.rsp
 nycd.exe: CMakeFiles/nycd.dir/objects1.rsp
 nycd.exe: CMakeFiles/nycd.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable nycd.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable nycd.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\nycd.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -173,6 +169,6 @@ CMakeFiles/nycd.dir/clean:
 .PHONY : CMakeFiles/nycd.dir/clean
 
 CMakeFiles/nycd.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles\nycd.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles\nycd.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/nycd.dir/depend
 

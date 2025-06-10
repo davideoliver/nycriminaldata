@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata
+CMAKE_SOURCE_DIR = C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc
+CMAKE_BINARY_DIR = C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC
 
 # Utility rule file for ContinuousCoverage.
 
@@ -84,6 +84,6 @@ CMakeFiles/ContinuousCoverage.dir/clean:
 .PHONY : CMakeFiles/ContinuousCoverage.dir/clean
 
 CMakeFiles/ContinuousCoverage.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc C:\Users\bruno\OneDrive\Documentos\GitHub\nycriminaldata\out\build\gcc\CMakeFiles\ContinuousCoverage.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC C:\Users\david\OneDrive\Documents\GitHub\nycriminaldata\out\build\GCC\CMakeFiles\ContinuousCoverage.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/ContinuousCoverage.dir/depend
 

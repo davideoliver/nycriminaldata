@@ -46,7 +46,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/Windows.cmake"
   "C:/Program Files/CMake/share/cmake-4.0/Modules/Platform/WindowsPaths.cmake"
   "C:/Program Files/CMake/share/cmake-4.0/Templates/CPackConfig.cmake.in"
-  "C:/Users/bruno/OneDrive/Documentos/GitHub/nycriminaldata/CMakeLists.txt"
+  "C:/Users/david/OneDrive/Documents/GitHub/nycriminaldata/CMakeLists.txt"
   "CMakeFiles/4.0.2/CMakeCCompiler.cmake"
   "CMakeFiles/4.0.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.0.2/CMakeRCCompiler.cmake"
