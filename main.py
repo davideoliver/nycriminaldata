@@ -4,20 +4,31 @@ import os
 import csv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'structures')))
 from complaint_data import ComplaintData # importa a classe ComplaintData pronta
-from hash_table import hashTable # importa a classe hashTable pronta
+from perfect_hash_table import PerfectHashTable # importa a classe hashTable pronta
 from b_tree import BTree  # importa a classe BTree pronta
 from skip_list import SkipList 
 from dlinklist import DoublyLinkedList  # importa a lista duplamente encadeada
 from trie import Trie  # importa a classe Trie pronta
+from priority_queue import PriorityQueue # importa a lista de prioridade
 
 # Caminho para o dataset
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complaint_Data_Historic.csv')
 
-hash = hashTable() # inicializa a tabela hash
+complaints_list = []
+
+with open(DATASET_PATH, newline='', encoding='utf-8') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        # Converte as chaves e valores do CSV em argumentos para ComplaintData
+        complaint = ComplaintData(**row)
+        complaints_list.append(complaint)
+
+perfect_hash = PerfectHashTable(complaints_list) # inicializa a tabela hash
 btree = BTree(t=3)  # inicializa com grau mínimo 3 (pode ajustar)
 skiplist = SkipList() # inicializa a skip list
 dlinked_list = DoublyLinkedList()  # inicializa a lista duplamente encadeada
 trie = Trie()
+priority_queue = PriorityQueue()  # inicializa a lista de prioridade
 
 def safe_int(val):
     try:
