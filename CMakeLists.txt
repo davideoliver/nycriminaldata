@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.10.0)
 project(nycd VERSION 0.1.0 LANGUAGES C CXX)
 
 add_executable(nycd 
-structures/main.cpp
-structures/doubly_linkedlist.cpp
-structures/hash_table.cpp
-structures/b_tree.cpp
-structures/skip_list.cpp
+Old_structures/main.cpp
+Old_structures/doubly_linkedlist.cpp
+Old_structures/hash_table.cpp
+Old_structures/b_tree.cpp
+Old_structures/skip_list.cpp
 )
 
 include(CTest)

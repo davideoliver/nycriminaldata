@@ -4,10 +4,10 @@
 #include <list>
 #include "complaint_data.h"
 
-class HashTable {
+class cHashTable {
 public:
-    HashTable(size_t size = 10007);
-    ~HashTable();
+    cHashTable(size_t size = 10007);
+    ~cHashTable();
 
     void insert(const ComplaintData& data);
     ComplaintData* get(const std::string& complaintNumber);
