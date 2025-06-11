@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+from datetime import datetime
 
 # Prompt: Created a doubly linked list with a init function siliar to the one present in hash_table,
 # and add the funcitons search insert and remove
@@ -107,6 +108,50 @@ class DoublyLinkedList:
                 return data
             current = current.next
         return None
+
+    def sort_by_date(self):
+        """Retorna uma lista dos elementos ordenados por CMPLNT_FR_DT (formato MM/DD/YYYY)."""
+        elements = []
+        current = self.head
+        while current:
+            elements.append(current.data)
+            current = current.next
+
+        def parse_datetime(x):
+            date_str = x.get('CMPLNT_FR_DT') if isinstance(x, dict) else getattr(x, 'CMPLNT_FR_DT', '')
+            time_str = x.get('CMPLNT_FR_TM') if isinstance(x, dict) else getattr(x, 'CMPLNT_FR_TM', '')
+            dt_str = f"{date_str} {time_str}".strip()
+            try:
+                # Exemplo de formato: 12/31/2020 23:59:59
+                return datetime.strptime(dt_str, "%m/%d/%Y %H:%M:%S")
+            except Exception:
+                try:
+                    # Caso o horário esteja só com horas e minutos
+                    return datetime.strptime(dt_str, "%m/%d/%Y %H:%M")
+                except Exception:
+                    try:
+                        # Caso só tenha a data
+                        return datetime.strptime(date_str, "%m/%d/%Y")
+                    except Exception:
+                        return datetime.min  # datas inválidas vão para o início
+
+        elements.sort(key=parse_datetime)
+        return elements
+    
+    def print_sorted_by_date(self):
+        sorted_data = self.sort_by_date()
+        print(f"Total de elementos ordenados: {len(sorted_data)}")
+        for complaint in sorted_data:
+            if hasattr(complaint, '__dict__'):
+                for k, v in vars(complaint).items():
+                    print(f"{k}: {v}")
+                print("-" * 40)
+            elif isinstance(complaint, dict):
+                for k, v in complaint.items():
+                    print(f"{k}: {v}")
+                print("-" * 40)
+            else:
+                print(complaint)
 
     # Prompt: create a function to print all elements in the list    
     def print_all(self):
