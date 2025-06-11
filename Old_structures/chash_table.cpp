@@ -2,11 +2,11 @@
 #include <iostream>
 #include <functional>
 
-cHashTable::HashTable(size_t size) : size_(size) {
+cHashTable::cHashTable(size_t size) : size_(size) {
     table_.resize(size_);
 }
 
-cHashTable::~HashTable() {}
+cHashTable::~cHashTable() {}
 
 size_t cHashTable::hash(const std::string& key) const {
     std::hash<std::string> hasher;

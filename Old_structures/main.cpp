@@ -102,7 +102,7 @@ int main() {
     std::string lineda; // Variable to hold each line of the communication file
     
     DoublyLinkedList list;
-    HashTable hashTable;
+    cHashTable chashTable;
     BTree btree(3);
     SkipList skipList(16, 0.75f);
     std::ifstream dataset("../../../datasets/NYPD_Complaint_Data_Historic.csv");
@@ -163,7 +163,7 @@ int main() {
         case 1:
             while (std::getline(dataset, linedt)) {
                 ComplaintData data = parseCSVLine(linedt);
-                hashTable.insert(data);
+                chashTable.insert(data);
             }
             break;
         default:

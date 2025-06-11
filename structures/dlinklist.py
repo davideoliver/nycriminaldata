@@ -1,38 +1,52 @@
-from complaint_data import ComplaintData
+import pandas as pd
+import random
 
 class Node:
-    def __init__(self, complaint: ComplaintData):
-        self.complaint = complaint
+    def __init__(self, data):
+        self.data = data  # data is a dict with all features
         self.prev = None
         self.next = None
 
-class DLinkedList:
-    def __init__(self):
+class DoublyLinkedList:
+    def __init__(self, dataframe: pd.DataFrame = None):
         self.head = None
         self.tail = None
+        if dataframe is not None:
+            self.from_dataframe(dataframe)
 
-    def insert(self, complaint: ComplaintData):
-        new_node = Node(complaint)
-        if not self.head:
+    def from_dataframe(self, df: pd.DataFrame):
+        for _, row in df.iterrows():
+            self.insert_at_end(row.to_dict())
+
+    def insert_at_end(self, data: dict):
+        new_node = Node(data)
+        if self.head is None:
             self.head = self.tail = new_node
         else:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
-        print(f"[DEBUG] Inserido: Complaint #{complaint.CMPLNT_NUM}")
 
-    def search(self, complaint_number: str):
+    def insert_after_id(self, id_value, data: dict):
         current = self.head
         while current:
-            if current.complaint.CMPLNT_NUM == complaint_number:
-                return current.complaint
+            if current.data.get('id') == id_value:
+                new_node = Node(data)
+                new_node.prev = current
+                new_node.next = current.next
+                if current.next:
+                    current.next.prev = new_node
+                else:
+                    self.tail = new_node
+                current.next = new_node
+                return True
             current = current.next
-        return None
+        return False
 
-    def remove(self, complaint_number: str):
+    def remove_by_id(self, id_value):
         current = self.head
         while current:
-            if current.complaint.CMPLNT_NUM == complaint_number:
+            if current.data.get('id') == id_value:
                 if current.prev:
                     current.prev.next = current.next
                 else:
@@ -41,22 +55,53 @@ class DLinkedList:
                     current.next.prev = current.prev
                 else:
                     self.tail = current.prev
-                print(f"[DEBUG] Removido Complaint #{complaint_number}")
                 return True
             current = current.next
-        print(f"[DEBUG] Complaint #{complaint_number} não encontrado para remoção")
         return False
 
-    def print_all(self):
-        if not self.head:
-            print("[INFO] Nenhuma reclamação cadastrada.")
-            return
-        print("=== Lista completa de reclamações (Doubly Linked List) ===")
+    def search_by_id(self, id_value):
         current = self.head
         while current:
-            print(f"Complaint #{current.complaint.CMPLNT_NUM}:")
-            for key, value in vars(current.complaint).items():
-                print(f"  {key}: {value}")
-            print("-----------------------------")
+            if current.data.get('id') == id_value:
+                return current.data
             current = current.next
-        print("====================================")
+        return None
+
+    def insert_at_random(self, data: dict):
+        """Insert a node at a random position in the list."""
+        new_node = Node(data)
+        # If the list is empty, insert as the only node
+        if self.head is None:
+            self.head = self.tail = new_node
+            return
+
+        # Count the number of nodes
+        length = 0
+        current = self.head
+        while current:
+            length += 1
+            current = current.next
+
+        # Choose a random position (0 = head, length = after tail)
+        pos = random.randint(0, length)
+
+        if pos == 0:
+            # Insert at head
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        elif pos == length:
+            # Insert at tail
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+        else:
+            # Insert in the middle
+            current = self.head
+            for _ in range(pos - 1):
+                current = current.next
+            new_node.next = current.next
+            new_node.prev = current
+            if current.next:
+                current.next.prev = new_node
+            current.next = new_node
