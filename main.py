@@ -5,6 +5,7 @@ import csv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'structures')))
 from hash_table import hashTable
 from b_tree import BTree  # importa a classe BTree pronta
+from skip_list import SkipList 
 from complaint_data import ComplaintData
 
 # Caminho para o dataset
@@ -12,6 +13,7 @@ DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complai
 
 hash = hashTable()
 btree = BTree(t=3)  # inicializa com grau mínimo 3 (pode ajustar)
+skiplist = SkipList()
 
 
 def safe_int(val):
@@ -71,11 +73,12 @@ if os.path.exists(DATASET_PATH):
             )
             hash.insert(complaint)
             btree.insert(complaint)
+            skiplist.insert(complaint)
 else:
     print(f"[ERRO] Dataset não encontrado em {DATASET_PATH}")
 
-hash.print_all()
-
-btree.print_all()
+#hash.print_all()
+#btree.print_all()
+skiplist.print_all()
 
 
