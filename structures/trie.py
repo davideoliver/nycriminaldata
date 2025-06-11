@@ -49,12 +49,15 @@ class Trie:
         removed = _remove(self.root, str(complaint_number), 0)
         return removed
 
-    def print_all(self):
+    def print_all(self, i = 10):
+        c = 0
         def _print_node(node, prefix):
             if node.is_end and node.complaint:
                 print(f"Complaint #{prefix}:")
                 for key, value in vars(node.complaint).items():
                     print(f"  {key}: {value}")
+                    c  = c + 1
+                    if(c < i): break
                 print("-----------------------------")
             for char, child in node.children.items():
                 _print_node(child, prefix + char)
@@ -66,6 +69,9 @@ class Trie:
         else:
             print("[INFO] Árvore Prefixada vazia")
 
+    # Prompt: I'd to create a function called filter_nulls() in each of the structures, it will receive a value
+    # and basing on it will change his behavior to removing whole camps with more than 50% of null data,
+    # to removing all the lines with any null values
     def filter_nulls(self, value):
         all_complaints = []
 
@@ -106,4 +112,16 @@ class Trie:
             for child in node.children.values():
                 collect_again(child)
         collect_again(self.root)
+        return result
+
+    def sort_by_id(self, reverse=False):
+        """Retorna uma lista dos ComplaintData ordenados por CMPLNT_NUM."""
+        result = []
+        def collect(node):
+            if node.is_end and node.complaint:
+                result.append(node.complaint)
+            for child in node.children.values():
+                collect(child)
+        collect(self.root)
+        result.sort(key=lambda x: x.CMPLNT_NUM, reverse=reverse)
         return result

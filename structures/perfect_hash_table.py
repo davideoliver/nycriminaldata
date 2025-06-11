@@ -117,7 +117,8 @@ class PerfectHashTable:
         print("[INFO] Nenhuma colisão detectada. Perfect hashing válida.")
         return False
 
-    def print_all(self):
+    def print_all(self, i):
+        c = 0
         if not self.data:
             print("[INFO] Nenhuma reclamação cadastrada.")
             return
@@ -127,8 +128,13 @@ class PerfectHashTable:
             for key, value in vars(complaint).items():
                 print(f"  {key}: {value}")
             print("-----------------------------")
+            c  = c + 1
+            if(c < i): break
         print("======================================================")
 
+    # Prompt: I'd to create a function called filter_nulls() in each of the structures, it will receive a value
+    # and basing on it will change his behavior to removing whole camps with more than 50% of null data,
+    # to removing all the lines with any null values
     def filter_nulls(self, value):
         if value == "columns":
             null_counts = {}
@@ -149,4 +155,12 @@ class PerfectHashTable:
             for cmplnt_num in to_remove:
                 self.remove(cmplnt_num)
         # Always return the current list after filtering
+        return list(self.data)
+
+    def sort_by_id(self, reverse=False):
+        """Ordena as reclamações pelo campo CMPLNT_NUM."""
+        self.data.sort(key=lambda x: x.CMPLNT_NUM, reverse=reverse)
+        # Atualiza o index_map após a ordenação
+        for i, complaint in enumerate(self.data):
+            self.index_map[complaint.CMPLNT_NUM] = i
         return list(self.data)

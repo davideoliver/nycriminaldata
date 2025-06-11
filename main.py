@@ -112,7 +112,8 @@ def main_individual(id):
     print("3. Remover uma reclamação por número")
     print("4. Filtragem e ordenação das reclamações")
     print("5. Cálculos Estatísticos com os Dados")
-    print("6. Simulações com Dados Novos")
+    print("6. Classificação de Dados")
+    print("7. Imprimir Dados")
     print("0. Voltar ao menu principal")
 
     while True:
@@ -223,50 +224,46 @@ def main_individual(id):
             main_individual(id)
         elif choice == '4':
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("Filtragem e ordenação das reclamações\n")
-            print("Escolha uma opção:")
-            print("1. Filtragem de reclamações com nulos")
-            print("2. Ordenação das reclamações por número de identificação")
-            sub_choice = input("Escolha uma opção: ")
-            if sub_choice == '1':
-                print("Você gostaria de eliminar campos com mais da metade de nulos? Ou  de eliminar reclamações inteiras que contenham nulos?")
-                value = input("Digite 'colums' para eliminar campos nulos ou 'rows' para eliminar reclamações com nulos: ").strip().lower()
-                if id == 0:
-                    results = dlinked_list.filter_nulls(value)
-                elif id == 1:
-                    results = hash.filter_nulls(value)
-                elif id == 2:
-                    results = btree.filter_nulls(value)
-                elif id == 3:
-                    results = skiplist.filter_nulls(value)
-                elif id == 4:
-                    results = trie.filter_nulls(value)
-                os.system('cls' if os.name == 'nt' else 'clear')
-                print("Filtragem concluída.")
-                os.system('pause')
-                os.system('cls' if os.name == 'nt' else 'clear')
-                main_individual(id)
-            elif sub_choice == '2':
-                print("Reclamações ordenadas por número de identificação:")
-                if id == 0:
-                    results = dlinked_list.sort_by_id()
-                elif id == 1:
-                    results = hash.sort_by_id()
-                elif id == 2:
-                    results = btree.sort_by_id()
-                elif id == 3:
-                    results = skiplist.sort_by_id()
-                elif id == 4:
-                    results = trie.sort_by_id()
-                os.system('pause')
-                m = 1
-                main_individual(id)
-            else:
-                os.system('cls' if os.name == 'nt' else 'clear')
-                print("Opção inválida.")
-                os.system('pause')
-                m = 1
-                main_individual(id)
+            print("Filtragem e Ordenação\n")
+            print("Você gostaria de eliminar campos com mais da metade de nulos? Ou  de eliminar reclamações inteiras que contenham nulos?")
+            value = input("Digite 'colums' para eliminar campos nulos ou 'rows' para eliminar reclamações com nulos: ").strip().lower()
+            if id == 0:
+                results = dlinked_list.filter_nulls(value)
+            elif id == 1:
+                results = hash.filter_nulls(value)
+            elif id == 2:
+                results = btree.filter_nulls(value)
+            elif id == 3:
+                results = skiplist.filter_nulls(value)
+            elif id == 4:
+                results = trie.filter_nulls(value)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            if value == 'columns':
+                print("Campos nulos removidos com sucesso!")
+            elif value == 'rows':
+                print("Reclamações com nulos removidas com sucesso!")
+            os.system('pause')
+            os.system('cls' if os.name == 'nt' else 'clear')
+            main_individual(id)
+        elif choice == '5':
+            print("Cálculos Estatísticos dos Dados\n")
+        elif choice == '6':
+            print("Ordenação e Classificação dos Dados\n")
+            order = input("Digite 'asc' para ordem crescente ou 'desc' para ordem decrescente em relação ao número da ocorrência: ").strip().lower()
+            if id == 0:
+                results = dlinked_list.sort_by_id(order)
+            elif id == 1:
+                results = hash.sort_by_id(order)
+            elif id == 2:
+                results = btree.sort_by_id(order)
+            elif id == 3:
+                results = skiplist.sort_by_id(order)
+            elif id == 4:
+                results = trie.sort_by_id(order)
+            if order == 'asc':
+                print("Reclamações ordenadas em ordem crescente!")
+            elif order == 'desc':
+                print("Reclamações ordenadas em ordem decrescente!")
             os.system('pause')
             m = 1
             main_individual(id)
@@ -274,10 +271,28 @@ def main_individual(id):
             os.system('cls' if os.name == 'nt' else 'clear')
             m = 0
             main()
+        elif choice == '7':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Impressão de Dados\n")
+            i = int(input("Quantas reclamações você gostaria de imprimir? (Padrão = 10): "))
+            if id == 0:
+                dlinked_list.print_all(i)
+            elif id == 1:
+                hash.print_all(i)
+            elif id == 2:
+                btree.print_all(i)
+            elif id == 3:
+                skiplist.print_all(i)
+            elif id == 4:
+                trie.print_all(i)
+            print("Dados impressos com sucesso!")
+            os.system('pause')
+            os.system('cls' if os.name == 'nt' else 'clear')
+            m = 1
+            main_individual(id)
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Opção inválida. Tente novamente.")
-            os.system('cls' if os.name == 'nt' else 'clear')
             os.system('pause')
             m = 1
             main_individual(id)
@@ -417,11 +432,12 @@ def main():
             main_problem()
         elif choice == '0':
             print("Saindo do sistema. Até logo!")
-            break
+            sys.exit(0)
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Opção inválida. Tente novamente.")
             os.system('pause')
             os.system('cls' if os.name == 'nt' else 'clear')
             main()
-main()
+if __name__ == "__main__":
+    main()

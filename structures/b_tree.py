@@ -192,16 +192,21 @@ class BTree:
             else:
                 self.root = self.root.children[0]
 
-    def print_all(self):
+    def print_all(self, i):
+        c = 0
         def _print_node(node, level=0):
             for key, value in zip(node.keys, node.values):
                 print(f"{'  '*level}Complaint #{key}:")
                 for attr, val in vars(value).items():
                     print(f"{'  '*(level+1)}{attr}: {val}")
                 print(f"{'  '*level}" + "-"*30)
+                c  = c + 1
+                if(c < i): break
             if not node.leaf:
                 for child in node.children:
                     _print_node(child, level + 1)
+                
+            
 
         if self.root:
             print("=== Lista completa de reclamações (Árvore B) ===")
@@ -227,6 +232,9 @@ class BTree:
             return _search(node.children[i], k)
         return _search(self.root, cmplnt_num)
 
+    # Prompt: I'd to create a function called filter_nulls() in each of the structures, it will receive a value
+    # and basing on it will change his behavior to removing whole camps with more than 50% of null data,
+    # to removing all the lines with any null values
     def filter_nulls(self, value):
         all_complaints = []
 
@@ -271,4 +279,19 @@ class BTree:
                     for child in node.children:
                         collect_again(child)
         collect_again(self.root)
+        return result
+
+    def sort_by_id(self, reverse=False):
+        """Retorna uma lista dos ComplaintData ordenados por CMPLNT_NUM."""
+        result = []
+        def inorder(node):
+            if node:
+                for i in range(len(node.keys)):
+                    if not node.leaf:
+                        inorder(node.children[i])
+                    result.append(node.values[i])
+                if not node.leaf:
+                    inorder(node.children[-1])
+        inorder(self.root)
+        result.sort(key=lambda x: x.CMPLNT_NUM, reverse=reverse)
         return result

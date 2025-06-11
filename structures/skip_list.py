@@ -84,7 +84,8 @@ class SkipList:
             print(f"[DEBUG] Complaint #{key} não encontrado para remoção")
             return False
 
-    def print_all(self):
+    def print_all(self, i=10):
+        c = 0
         current = self.header.forward[0]
         if not current:
             print("[INFO] Skip List vazia")
@@ -96,6 +97,8 @@ class SkipList:
                 print(f"  {key}: {value}")
             print("-----------------------------")
             current = current.forward[0]
+            c  = c + 1
+            if(c < i): break
         print("====================================")
 
     # Prompt: Create a search by CMPLNT_NUM in skip list
@@ -103,6 +106,9 @@ class SkipList:
         """Busca uma reclamação pelo número CMPLNT_NUM."""
         return self.get(cmplnt_num)
     
+    # Prompt: I'd to create a function called filter_nulls() in each of the structures, it will receive a value
+    # and basing on it will change his behavior to removing whole camps with more than 50% of null data,
+    # to removing all the lines with any null values
     def filter_nulls(self, value):
         # Coleta todos os ComplaintData
         complaints = []
@@ -140,3 +146,13 @@ class SkipList:
             result.append(current.value)
             current = current.forward[0]
         return result
+
+    def sort_by_id(self, reverse=False):
+        """Retorna uma lista dos ComplaintData ordenados por CMPLNT_NUM."""
+        elements = []
+        current = self.header.forward[0]
+        while current:
+            elements.append(current.value)
+            current = current.forward[0]
+        elements.sort(key=lambda x: x.CMPLNT_NUM, reverse=reverse)
+        return elements

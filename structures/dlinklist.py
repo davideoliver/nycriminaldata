@@ -154,12 +154,19 @@ class DoublyLinkedList:
                 print(complaint)
 
     # Prompt: create a function to print all elements in the list    
-    def print_all(self):
+    def print_all(self, i):
         current = self.head
+        c = 0
         while current:
             print(current.data)
             current = current.next
+            c  = c + 1
+            if(c < i): break
 
+
+    # Prompt: I'd to create a function called filter_nulls() in each of the structures, it will receive a value
+    # and basing on it will change his behavior to removing whole camps with more than 50% of null data,
+    # to removing all the lines with any null values
     def filter_nulls(self, value):
         # Coleta todos os dados
         all_data = []
@@ -205,3 +212,23 @@ class DoublyLinkedList:
             result.append(current.data)
             current = current.next
         return result
+    
+    def sort_by_id(self, reverse=False):
+        """Ordena a lista pelo campo CMPLNT_NUM (crescente ou decrescente)."""
+        # Coleta todos os dados
+        elements = []
+        current = self.head
+        while current:
+            elements.append(current.data)
+            current = current.next
+
+        def get_id(x):
+            return x.get('CMPLNT_NUM') if isinstance(x, dict) else getattr(x, 'CMPLNT_NUM', None)
+
+        elements.sort(key=get_id, reverse=reverse)
+
+        # Reconstrói a lista ligada
+        self.head = self.tail = None
+        for data in elements:
+            self.insert_at_end(data)
+        return elements
