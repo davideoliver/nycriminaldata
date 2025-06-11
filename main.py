@@ -6,14 +6,24 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'structu
 from complaint_data import ComplaintData # importa a classe ComplaintData pronta
 from hash_table import hashTable # importa a classe hashTable pronta
 from b_tree import BTree  # importa a classe BTree pronta
+<<<<<<< HEAD
 from dlinklist import DLinkedList  # importa a lista duplamente encadeada
+=======
+from skip_list import SkipList 
+from complaint_data import ComplaintData
+>>>>>>> d46f6d4cdea329f86fdaa3278ac44aa983764e91
 
 # Caminho para o dataset
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complaint_Data_Historic.csv')
 
 hash = hashTable() # inicializa a tabela hash
 btree = BTree(t=3)  # inicializa com grau mínimo 3 (pode ajustar)
+<<<<<<< HEAD
 dlinked_list = DLinkedList()  # inicializa a lista duplamente encadeada
+=======
+skiplist = SkipList()
+
+>>>>>>> d46f6d4cdea329f86fdaa3278ac44aa983764e91
 
 def safe_int(val):
     try:
@@ -72,11 +82,21 @@ if os.path.exists(DATASET_PATH):
             )
             hash.insert(complaint)
             btree.insert(complaint)
+<<<<<<< HEAD
             dlinked_list.insert(complaint)
 
 
 #hash.print_all()
 btree.print_all()
 #dlinked_list.print_all()
+=======
+            skiplist.insert(complaint)
+else:
+    print(f"[ERRO] Dataset não encontrado em {DATASET_PATH}")
+
+#hash.print_all()
+#btree.print_all()
+skiplist.print_all()
+>>>>>>> d46f6d4cdea329f86fdaa3278ac44aa983764e91
 
 
