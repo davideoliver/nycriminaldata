@@ -81,7 +81,7 @@ class SkipList:
                 self.level -= 1
             return True
         else:
-            print(f"[DEBUG] Complaint #{key} não encontrado para remoção")
+            #print(f"[DEBUG] Complaint #{key} não encontrado para remoção")
             return False
 
     def print_all(self, i=10):

@@ -68,7 +68,7 @@ class BTreeNode:
         else:
             # Caso 2: chave não está no nó
             if self.leaf:
-                print(f"[DEBUG] Chave {k} não encontrada na árvore.")
+                #print(f"[DEBUG] Chave {k} não encontrada na árvore.")
                 return
 
             # Verifica se o filho onde poderia estar a chave tem ao menos t chaves

@@ -363,7 +363,7 @@ def main_benchmark():
                     estrutura.remove(chave)
         return benchmark_operation(remover)
 
-    amostra = carregarDados(0)  # ou dados[:10000] para teste rápido
+    amostra = carregarDados(-1)  # ou dados[:10000] para teste rápido
     chaves = [c.CMPLNT_NUM for c in amostra]
 
 
@@ -377,53 +377,53 @@ def main_benchmark():
     print("0. Voltar ao menu principal")
 
     # DLinkedList
-    dlinked = DoublyLinkedList()
+    
     print("\nBenchmark - Lista Duplamente Encadeada")
-    res_ins = benchmark_insercao(dlinked, dados, "dlinked")
+    res_ins = benchmark_insercao(dlinked_list, amostra, "dlinked")
     print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
-    res_busca = benchmark_busca(dlinked, chaves, "dlinked")
+    res_busca = benchmark_busca(dlinked_list, chaves, "dlinked")
     print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
-    res_rem = benchmark_remocao(dlinked, chaves, "dlinked")
+    res_rem = benchmark_remocao(dlinked_list, chaves, "dlinked")
     print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
 
     # PerfectHashTable
-    hash_bench = PerfectHashTable(DATASET_PATH)
+
     print("\nBenchmark - Tabela Hash Perfeita")
-    res_ins = benchmark_insercao(hash_bench, amostra, "hash")
+    res_ins = benchmark_insercao(hash, amostra, "hash")
     print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
-    res_busca = benchmark_busca(hash_bench, chaves, "hash")
+    res_busca = benchmark_busca(hash, chaves, "hash")
     print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
-    res_rem = benchmark_remocao(hash_bench, chaves, "hash")
+    res_rem = benchmark_remocao(hash, chaves, "hash")
     print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
 
     # BTree
-    btree_bench = BTree(t=3)
+
     print("\nBenchmark - Árvore B")
-    res_ins = benchmark_insercao(btree_bench, amostra, "btree")
+    res_ins = benchmark_insercao(btree, amostra, "btree")
     print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
-    res_busca = benchmark_busca(btree_bench, chaves, "btree")
+    res_busca = benchmark_busca(btree, chaves, "btree")
     print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
-    res_rem = benchmark_remocao(btree_bench, chaves, "btree")
+    res_rem = benchmark_remocao(btree, chaves, "btree")
     print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
 
     # SkipList
-    skip_bench = SkipList()
+
     print("\nBenchmark - Skip List")
-    res_ins = benchmark_insercao(skip_bench, amostra, "skiplist")
+    res_ins = benchmark_insercao(skiplist, amostra, "skiplist")
     print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
-    res_busca = benchmark_busca(skip_bench, chaves, "skiplist")
+    res_busca = benchmark_busca(skiplist, chaves, "skiplist")
     print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
-    res_rem = benchmark_remocao(skip_bench, chaves, "skiplist")
+    res_rem = benchmark_remocao(skiplist, chaves, "skiplist")
     print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
 
     # Trie
-    trie_bench = Trie()
+
     print("\nBenchmark - Trie")
-    res_ins = benchmark_insercao(trie_bench, amostra, "trie")
+    res_ins = benchmark_insercao(trie, amostra, "trie")
     print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
-    res_busca = benchmark_busca(trie_bench, chaves, "trie")
+    res_busca = benchmark_busca(trie, chaves, "trie")
     print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
-    res_rem = benchmark_remocao(trie_bench, chaves, "trie")
+    res_rem = benchmark_remocao(trie, chaves, "trie")
     print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
 
     print("\nBenchmark concluído. Pressione qualquer tecla para voltar ao menu.")
@@ -683,6 +683,7 @@ def carregarDados(id):
                 if id == 2: btree.insert(complaint)
                 if id == 3: skiplist.insert(complaint)
                 if id == 4: trie.insert(complaint)
+    return dados
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
