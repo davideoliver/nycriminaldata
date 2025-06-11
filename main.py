@@ -6,24 +6,16 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'structu
 from complaint_data import ComplaintData # importa a classe ComplaintData pronta
 from hash_table import hashTable # importa a classe hashTable pronta
 from b_tree import BTree  # importa a classe BTree pronta
-<<<<<<< HEAD
-from dlinklist import DLinkedList  # importa a lista duplamente encadeada
-=======
 from skip_list import SkipList 
-from complaint_data import ComplaintData
->>>>>>> d46f6d4cdea329f86fdaa3278ac44aa983764e91
+from dlinklist import DLinkedList  # importa a lista duplamente encadeada
 
 # Caminho para o dataset
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complaint_Data_Historic.csv')
 
 hash = hashTable() # inicializa a tabela hash
 btree = BTree(t=3)  # inicializa com grau mínimo 3 (pode ajustar)
-<<<<<<< HEAD
+skiplist = SkipList() # inicializa a skip list
 dlinked_list = DLinkedList()  # inicializa a lista duplamente encadeada
-=======
-skiplist = SkipList()
-
->>>>>>> d46f6d4cdea329f86fdaa3278ac44aa983764e91
 
 def safe_int(val):
     try:
@@ -82,21 +74,51 @@ if os.path.exists(DATASET_PATH):
             )
             hash.insert(complaint)
             btree.insert(complaint)
-<<<<<<< HEAD
+            skiplist.insert(complaint)
             dlinked_list.insert(complaint)
 
-
-#hash.print_all()
-btree.print_all()
 #dlinked_list.print_all()
-=======
-            skiplist.insert(complaint)
-else:
-    print(f"[ERRO] Dataset não encontrado em {DATASET_PATH}")
-
 #hash.print_all()
 #btree.print_all()
-skiplist.print_all()
->>>>>>> d46f6d4cdea329f86fdaa3278ac44aa983764e91
+#skiplist.print_all()
 
+print("Bem vindo ao sistema de gerenciamento de reclamações da NYPD")
 
+while True:
+    print("\nMenu:")
+    print("1. Buscar reclamação")
+    print("2. Remover reclamação")
+    print("3. Listar todas as reclamações")
+    print("4. Sair")
+    
+    choice = input("Escolha uma opção: ")
+    
+    if choice == '1':
+        cmplnt_num = input("Digite o número da reclamação: ")
+        complaint = hash.get(cmplnt_num)
+        if complaint:
+            print(f"Reclamação encontrada: {complaint}")
+        else:
+            print("Reclamação não encontrada.")
+    
+    elif choice == '2':
+        cmplnt_num = input("Digite o número da reclamação a ser removida: ")
+        if hash.remove(cmplnt_num):
+            btree.remove(cmplnt_num)
+            skiplist.remove(cmplnt_num)
+            dlinked_list.remove(cmplnt_num)
+        else:
+            print("Reclamação não encontrada para remoção.")
+    
+    elif choice == '3':
+        hash.print_all()
+        btree.print_all()
+        skiplist.print_all()
+        dlinked_list.print_all()
+    
+    elif choice == '4':
+        print("Saindo do sistema...")
+        break
+    
+    else:
+        print("Opção inválida, tente novamente.")
