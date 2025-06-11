@@ -233,7 +233,50 @@ def main_individual(id):
             m = 1
             main_individual(id)
         elif choice == '4':
-            print("Filtragem e ordenação das reclamações")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Filtragem e ordenação das reclamações\n")
+            print("Escolha uma opção:")
+            print("1. Filtragem de reclamações com campos nulos")
+            print("2. Ordenação das reclamações por número de identificação")
+            sub_choice = input("Escolha uma opção: ")
+            if sub_choice == '1':
+                print("Reclamações com campos nulos:")
+                if id == 0:
+                    results = dlinked_list.filter_nulls()
+                elif id == 1:
+                    results = hash.filter_nulls()
+                elif id == 2:
+                    results = btree.filter_nulls()
+                elif id == 3:
+                    results = skiplist.filter_nulls()
+                elif id == 4:
+                    results = trie.filter_nulls()
+                for r in results:
+                    print(r)
+            elif sub_choice == '2':
+                print("Reclamações ordenadas por número de identificação:")
+                if id == 0:
+                    results = dlinked_list.sort_by_id()
+                elif id == 1:
+                    results = hash.sort_by_id()
+                elif id == 2:
+                    results = btree.sort_by_id()
+                elif id == 3:
+                    results = skiplist.sort_by_id()
+                elif id == 4:
+                    results = trie.sort_by_id()
+                os.system('pause')
+                m = 1
+                main_individual(id)
+            else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("Opção inválida.")
+                os.system('pause')
+                m = 1
+                main_individual(id)
+            os.system('pause')
+            m = 1
+            main_individual(id)
         elif choice == '0':
             os.system('cls' if os.name == 'nt' else 'clear')
             m = 0
@@ -285,7 +328,7 @@ def main_structures():
             os.system('pause')
             main_structures()
 
-def main_restrictions():
+def main_problem():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Esta seção é dedicada a restrições e limitações.")
     print("Aqui você pode definir restrições para as operações.")
@@ -298,8 +341,8 @@ def main():
 
     print("O que você gostaria de fazer?")
     print("1. Operações Individuais")
-    print("2. Testes de Benchmark")
-    print("3. Restrições")
+    print("2. Testes de Benchmark e Restrições")
+    print("3. Resolução de Problema")
     print("0. Sair")
     while True:
         choice = input("Digite sua escolha: ")
@@ -308,7 +351,7 @@ def main():
         elif choice == '2':
             main_benchmark()
         elif choice == '3':
-            main_restrictions()
+            main_problem()
         elif choice == '0':
             print("Saindo do sistema. Até logo!")
             break
