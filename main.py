@@ -2,6 +2,8 @@ from dataclasses import dataclass, fields
 import sys
 import os
 import csv
+import time
+import tracemalloc
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'structures')))
 from complaint_data import ComplaintData # importa a classe ComplaintData pronta
 from perfect_hash_table import PerfectHashTable # importa a classe PerfectHashTable pronta
@@ -298,6 +300,135 @@ def main_individual(id):
             main_individual(id)
 
 def main_benchmark():
+    
+    def benchmark_operation(operation, *args, **kwargs):
+        tracemalloc.start()
+        start_time = time.perf_counter()
+        result = operation(*args, **kwargs)
+        end_time = time.perf_counter()
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        return {
+            "tempo_segundos": end_time - start_time,
+            "memoria_bytes": peak,
+            "resultado": result
+        }
+
+    def benchmark_insercao(estrutura, dados, tipo):
+        def inserir():
+            if tipo == "dlinked":
+                for dado in dados:
+                    estrutura.insert_at_end(dado)
+            elif tipo == "hash":
+                for dado in dados:
+                    estrutura.insert(dado)
+            elif tipo == "btree":
+                for dado in dados:
+                    estrutura.insert(dado)
+            elif tipo == "skiplist":
+                for dado in dados:
+                    estrutura.insert(dado)
+            elif tipo == "trie":
+                for dado in dados:
+                    estrutura.insert(dado)
+        return benchmark_operation(inserir)
+
+    def benchmark_busca(estrutura, chaves, tipo):
+        def buscar():
+            for chave in chaves:
+                if tipo == "dlinked":
+                    estrutura.search_by_id(chave)
+                elif tipo == "hash":
+                    estrutura.get(chave)
+                elif tipo == "btree":
+                    estrutura.search_by_id(chave)
+                elif tipo == "skiplist":
+                    estrutura.search_by_id(chave)
+                elif tipo == "trie":
+                    estrutura.get(chave)
+        return benchmark_operation(buscar)
+
+    def benchmark_remocao(estrutura, chaves, tipo):
+        def remover():
+            for chave in chaves:
+                if tipo == "dlinked":
+                    estrutura.remove_by_id(chave)
+                elif tipo == "hash":
+                    estrutura.remove(chave)
+                elif tipo == "btree":
+                    estrutura.remove(chave)
+                elif tipo == "skiplist":
+                    estrutura.remove(chave)
+                elif tipo == "trie":
+                    estrutura.remove(chave)
+        return benchmark_operation(remover)
+
+    amostra = carregarDados(0)  # ou dados[:10000] para teste rápido
+    chaves = [c.CMPLNT_NUM for c in amostra]
+
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Escolha uma estrutura para trabalhar:")
+    print("1. Lista Duplamente Encadeada")
+    print("2. Tabela Hash")
+    print("3. Árvore B")
+    print("4. Lista de Pulos")
+    print("5. Árvore Prefixada (Trie)")
+    print("0. Voltar ao menu principal")
+
+    # DLinkedList
+    dlinked = DoublyLinkedList()
+    print("\nBenchmark - Lista Duplamente Encadeada")
+    res_ins = benchmark_insercao(dlinked, dados, "dlinked")
+    print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
+    res_busca = benchmark_busca(dlinked, chaves, "dlinked")
+    print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
+    res_rem = benchmark_remocao(dlinked, chaves, "dlinked")
+    print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
+
+    # PerfectHashTable
+    hash_bench = PerfectHashTable(DATASET_PATH)
+    print("\nBenchmark - Tabela Hash Perfeita")
+    res_ins = benchmark_insercao(hash_bench, amostra, "hash")
+    print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
+    res_busca = benchmark_busca(hash_bench, chaves, "hash")
+    print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
+    res_rem = benchmark_remocao(hash_bench, chaves, "hash")
+    print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
+
+    # BTree
+    btree_bench = BTree(t=3)
+    print("\nBenchmark - Árvore B")
+    res_ins = benchmark_insercao(btree_bench, amostra, "btree")
+    print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
+    res_busca = benchmark_busca(btree_bench, chaves, "btree")
+    print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
+    res_rem = benchmark_remocao(btree_bench, chaves, "btree")
+    print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
+
+    # SkipList
+    skip_bench = SkipList()
+    print("\nBenchmark - Skip List")
+    res_ins = benchmark_insercao(skip_bench, amostra, "skiplist")
+    print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
+    res_busca = benchmark_busca(skip_bench, chaves, "skiplist")
+    print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
+    res_rem = benchmark_remocao(skip_bench, chaves, "skiplist")
+    print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
+
+    # Trie
+    trie_bench = Trie()
+    print("\nBenchmark - Trie")
+    res_ins = benchmark_insercao(trie_bench, amostra, "trie")
+    print(f"Inserção: {res_ins['tempo_segundos']:.4f}s, Memória: {res_ins['memoria_bytes']/1024:.2f} KB")
+    res_busca = benchmark_busca(trie_bench, chaves, "trie")
+    print(f"Busca: {res_busca['tempo_segundos']:.4f}s, Memória: {res_busca['memoria_bytes']/1024:.2f} KB")
+    res_rem = benchmark_remocao(trie_bench, chaves, "trie")
+    print(f"Remoção: {res_rem['tempo_segundos']:.4f}s, Memória: {res_rem['memoria_bytes']/1024:.2f} KB")
+
+    print("\nBenchmark concluído. Pressione qualquer tecla para voltar ao menu.")
+    os.system('pause')
+
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Esta seção é dedicada a testes de benchmark.")
     # Aqui você pode implementar os testes de benchmark
@@ -504,6 +635,7 @@ def main_problem():
         main_problem()
 
 def carregarDados(id):
+    dados = []
     if os.path.exists(DATASET_PATH) and m == 0:
         with open(DATASET_PATH, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -546,6 +678,7 @@ def carregarDados(id):
                     VIC_RACE=row.get('VIC_RACE', ''),
                     VIC_SEX=row.get('VIC_SEX', '')
                 )
+                dados.append(complaint)
                 if id == 0: dlinked_list.insert_at_random(complaint)
                 if id == 1: hash.insert(complaint)
                 if id == 2: btree.insert(complaint)
