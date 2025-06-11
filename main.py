@@ -9,6 +9,7 @@ from b_tree import BTree  # importa a classe BTree pronta
 from skip_list import SkipList 
 from dlinklist import DoublyLinkedList  # importa a lista duplamente encadeada
 from trie import Trie  # importa a classe Trie pronta
+from priority_queue import PriorityQueue # importa a lista de prioridade
 
 # Caminho para o dataset
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complaint_Data_Historic.csv')
@@ -18,6 +19,7 @@ btree = BTree(t=3)  # inicializa com grau mínimo 3 (pode ajustar)
 skiplist = SkipList() # inicializa a skip list
 dlinked_list = DoublyLinkedList()  # inicializa a lista duplamente encadeada
 trie = Trie()
+priority_queue = PriorityQueue()  # inicializa a lista de prioridade
 
 def safe_int(val):
     try:
@@ -76,15 +78,18 @@ if os.path.exists(DATASET_PATH):
             )
             hash.insert(complaint)
             btree.insert(complaint)
-            #skiplist.insert(complaint)
-            dlinked_list.insert(complaint)
+            skiplist.insert(complaint)
+            dlinked_list.insert_at_random(complaint)
             trie.insert(complaint)
+            priority_queue.insert(complaint)
 
 #dlinked_list.print_all()
 #hash.print_all()
 #btree.print_all()
 #skiplist.print_all()
-trie.print_all()
+#trie.print_all()
+#priority_queue.print_all()
+
 
 print("Bem vindo ao sistema de gerenciamento de reclamações da NYPD")
 
