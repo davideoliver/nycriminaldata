@@ -74,17 +74,155 @@ if os.path.exists(DATASET_PATH):
                 VIC_RACE=row.get('VIC_RACE', ''),
                 VIC_SEX=row.get('VIC_SEX', '')
             )
-            hash.insert(complaint)
-            btree.insert(complaint)
-            #skiplist.insert(complaint)
-            dlinked_list.insert(complaint)
-            trie.insert(complaint)
 
-#dlinked_list.print_all()
-#hash.print_all()
-#btree.print_all()
-#skiplist.print_all()
-trie.print_all()
+def main_individual(id):
 
-print("Bem vindo ao sistema de gerenciamento de reclamações da NYPD")
+    structures = [
+        "Lista Duplamente Encadeada",
+        "Tabela Hash",
+        "Árvore B",
+        "Lista de Pulos",
+        "Árvore Prefixada"
+    ]
 
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Esta seção é dedicada a operações individuais. Você escolheu a estrutura: ", structures[id])
+    print("O que você gostaria de fazer?")
+    print("1. Inserir uma nova reclamação")
+    print("2. Buscar uma reclamação por número")
+    print("3. Remover uma reclamação por número")
+    print("4. Filtragem e ordenação das reclamações")
+    print("5. Cálculos Estatísticos com os Dados")
+    print("6. Simulações com Dados Novos")
+    print("0. Voltar ao menu principal")
+
+    while True:
+        choice = input("Digite sua escolha: ")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if choice == '1':
+            data = {}
+            print("Digite os dados da reclamação:\n")
+            for i in range(3):
+                type = ["Tipo de crime: ", "Condado: ", "Localidade: "]
+                data[i] = input(type[i])
+            if id == 0:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                complaint = ComplaintData(
+                    OFNS_DESC=data[0],
+                    BORO_NM=data[1],
+                    PREM_TYP_DESC=data[2],
+                    CMPLNT_NUM=None,
+                    CMPLNT_FR_DT=None,
+                    CMPLNT_FR_TM=None,
+                    CMPLNT_TO_DT=None,
+                    CMPLNT_TO_TM=None,
+                    ADDR_PCT_CD=None,
+                    RPT_DT=None,
+                    KY_CD=None,
+                    PD_CD=None,
+                    PD_DESC=None,
+                    CRM_ATPT_CPTD_CD=None,
+                    LAW_CAT_CD=None,
+                    LOC_OF_OCCUR_DESC=None,
+                    JURIS_DESC=None,
+                    JURISDICTION_CODE=None,
+                    PARKS_NM=None,
+                    HADEVELOPT=None,
+                    HOUSING_PSA=None,
+                    X_COORD_CD=None,
+                    Y_COORD_CD=None,
+                    SUSP_AGE_GROUP=None,
+                    SUSP_RACE=None,
+                    SUSP_SEX=None,
+                    TRANSIT_DISTRICT=None,
+                    Latitude=None,
+                    Longitude=None,
+                    Lat_Lon=None,
+                    PATROL_BORO=None,
+                    STATION_NAME=None,
+                    VIC_AGE_GROUP=None,
+                    VIC_RACE=None,
+                    VIC_SEX=None
+                )
+                dlinked_list.print_all()
+                dlinked_list.append(complaint)
+                print("Reclamação inserida na Lista Duplamente Encadeada com sucesso!")
+        elif choice == '2':
+            print("Buscar uma reclamação por número")
+        elif choice == '3':
+            print("Remover uma reclamação por número")
+        elif choice == '4':
+            print("Filtragem e ordenação das reclamações")
+        elif choice == '0':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            main()
+        else:
+            print("Opção inválida. Tente novamente.")
+            main_individual(id)
+
+def main_benchmark():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Esta seção é dedicada a testes de benchmark.")
+    # Aqui você pode implementar os testes de benchmark
+    # Exemplo: medir o tempo de inserção, busca, etc.
+    print("Testes de benchmark ainda não implementados.")
+
+def main_structures():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Escolha uma estrutura para trabalhar:")
+    print("1. Lista Duplamente Encadeada")
+    print("2. Tabela Hash")
+    print("3. Árvore B")
+    print("4. Lista de Pulos")
+    print("5. Árvore Prefixada (Trie)")
+    print("0. Voltar ao menu principal")
+
+    while True:
+        choice = input("Digite sua escolha: ")
+        if choice == '1':
+            main_individual(0)
+        elif choice == '2':
+            main_individual(1)
+        elif choice == '3':
+            main_individual(2)
+        elif choice == '4':
+            main_individual(3)
+        elif choice == '5':
+            main_individual(4)
+        elif choice == '0':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            main()
+        else:
+            print("Opção inválida. Tente novamente.")
+            main_structures()
+
+def main_restrictions():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Esta seção é dedicada a restrições e limitações.")
+    print("Aqui você pode definir restrições para as operações.")
+    # Aqui você pode implementar as restrições
+    print("Restrições ainda não implementadas.")
+
+def main():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Bem vindo ao sistema de gerenciamento de reclamações da NYPD")
+
+    print("O que você gostaria de fazer?")
+    print("1. Operações Individuais")
+    print("2. Testes de Benchmark")
+    print("3. Restrições")
+    print("0. Sair")
+    while True:
+        choice = input("Digite sua escolha: ")
+        if choice == '1':
+            main_structures()
+        elif choice == '2':
+            main_benchmark()
+        elif choice == '3':
+            main_restrictions()
+        elif choice == '0':
+            print("Saindo do sistema. Até logo!")
+            break
+        else:
+            print("Opção inválida. Tente novamente.")
+main()

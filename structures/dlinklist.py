@@ -27,6 +27,45 @@ class DoublyLinkedList:
             new_node.prev = self.tail
             self.tail = new_node
 
+    def insert_at_random(self, data: dict):
+        """Insert a node at a random position in the list."""
+        new_node = Node(data)
+        # If the list is empty, insert as the only node
+        if self.head is None:
+            self.head = self.tail = new_node
+            return
+
+        # Count the number of nodes
+        length = 0
+        current = self.head
+        while current:
+            length += 1
+            current = current.next
+
+        # Choose a random position (0 = head, length = after tail)
+        pos = random.randint(0, length)
+
+        if pos == 0:
+            # Insert at head
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        elif pos == length:
+            # Insert at tail
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+        else:
+            # Insert in the middle
+            current = self.head
+            for _ in range(pos - 1):
+                current = current.next
+            new_node.next = current.next
+            new_node.prev = current
+            if current.next:
+                current.next.prev = new_node
+            current.next = new_node
+
     def insert_after_id(self, id_value, data: dict):
         current = self.head
         while current:
@@ -66,42 +105,3 @@ class DoublyLinkedList:
                 return current.data
             current = current.next
         return None
-
-    def insert_at_random(self, data: dict):
-        """Insert a node at a random position in the list."""
-        new_node = Node(data)
-        # If the list is empty, insert as the only node
-        if self.head is None:
-            self.head = self.tail = new_node
-            return
-
-        # Count the number of nodes
-        length = 0
-        current = self.head
-        while current:
-            length += 1
-            current = current.next
-
-        # Choose a random position (0 = head, length = after tail)
-        pos = random.randint(0, length)
-
-        if pos == 0:
-            # Insert at head
-            new_node.next = self.head
-            self.head.prev = new_node
-            self.head = new_node
-        elif pos == length:
-            # Insert at tail
-            self.tail.next = new_node
-            new_node.prev = self.tail
-            self.tail = new_node
-        else:
-            # Insert in the middle
-            current = self.head
-            for _ in range(pos - 1):
-                current = current.next
-            new_node.next = current.next
-            new_node.prev = current
-            if current.next:
-                current.next.prev = new_node
-            current.next = new_node
