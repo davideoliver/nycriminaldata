@@ -56,7 +56,7 @@ class BTreeNode:
     def remove(self, k):
         idx = self.find_key(k)
 
-        # Caso 1: chave está no nó
+        # Caso 1: chave está no 
         if idx < len(self.keys) and self.keys[idx] == k:
             if self.leaf:
                 # Remover da folha direto
@@ -64,7 +64,7 @@ class BTreeNode:
                 self.values.pop(idx)
                 print(f"[DEBUG] Removido {k} de folha")
             else:
-                # Nó interno: tem 3 subcasos
+                #  interno: tem 3 subcasos
                 self.remove_from_internal_node(idx)
         else:
             # Caso 2: chave não está no nó

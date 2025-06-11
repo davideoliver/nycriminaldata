@@ -1,51 +1,38 @@
-import pandas as pd
+from complaint_data import ComplaintData
 
 class Node:
-    def __init__(self, data):
-        self.data = data  # data is a dict with all features
+    def __init__(self, complaint: ComplaintData):
+        self.complaint = complaint
         self.prev = None
         self.next = None
 
-class DoublyLinkedList:
-    def __init__(self, dataframe: pd.DataFrame = None):
+class DLinkedList:
+    def __init__(self):
         self.head = None
         self.tail = None
-        if dataframe is not None:
-            self.from_dataframe(dataframe)
 
-    def from_dataframe(self, df: pd.DataFrame):
-        for _, row in df.iterrows():
-            self.insert_at_end(row.to_dict())
-
-    def insert_at_end(self, data: dict):
-        new_node = Node(data)
-        if self.head is None:
+    def insert(self, complaint: ComplaintData):
+        new_node = Node(complaint)
+        if not self.head:
             self.head = self.tail = new_node
         else:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
+        print(f"[DEBUG] Inserido: Complaint #{complaint.CMPLNT_NUM}")
 
-    def insert_after_id(self, id_value, data: dict):
+    def search(self, complaint_number: str):
         current = self.head
         while current:
-            if current.data.get('id') == id_value:
-                new_node = Node(data)
-                new_node.prev = current
-                new_node.next = current.next
-                if current.next:
-                    current.next.prev = new_node
-                else:
-                    self.tail = new_node
-                current.next = new_node
-                return True
+            if current.complaint.CMPLNT_NUM == complaint_number:
+                return current.complaint
             current = current.next
-        return False
+        return None
 
-    def remove_by_id(self, id_value):
+    def remove(self, complaint_number: str):
         current = self.head
         while current:
-            if current.data.get('id') == id_value:
+            if current.complaint.CMPLNT_NUM == complaint_number:
                 if current.prev:
                     current.prev.next = current.next
                 else:
@@ -54,14 +41,22 @@ class DoublyLinkedList:
                     current.next.prev = current.prev
                 else:
                     self.tail = current.prev
+                print(f"[DEBUG] Removido Complaint #{complaint_number}")
                 return True
             current = current.next
+        print(f"[DEBUG] Complaint #{complaint_number} não encontrado para remoção")
         return False
 
-    def search_by_id(self, id_value):
+    def print_all(self):
+        if not self.head:
+            print("[INFO] Nenhuma reclamação cadastrada.")
+            return
+        print("=== Lista completa de reclamações (Doubly Linked List) ===")
         current = self.head
         while current:
-            if current.data.get('id') == id_value:
-                return current.data
+            print(f"Complaint #{current.complaint.CMPLNT_NUM}:")
+            for key, value in vars(current.complaint).items():
+                print(f"  {key}: {value}")
+            print("-----------------------------")
             current = current.next
-        return None
+        print("====================================")

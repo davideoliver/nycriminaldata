@@ -3,16 +3,17 @@ import sys
 import os
 import csv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'structures')))
-from hash_table import hashTable
+from complaint_data import ComplaintData # importa a classe ComplaintData pronta
+from hash_table import hashTable # importa a classe hashTable pronta
 from b_tree import BTree  # importa a classe BTree pronta
-from complaint_data import ComplaintData
+from dlinklist import DLinkedList  # importa a lista duplamente encadeada
 
 # Caminho para o dataset
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complaint_Data_Historic.csv')
 
-hash = hashTable()
+hash = hashTable() # inicializa a tabela hash
 btree = BTree(t=3)  # inicializa com grau mínimo 3 (pode ajustar)
-
+dlinked_list = DLinkedList()  # inicializa a lista duplamente encadeada
 
 def safe_int(val):
     try:
@@ -71,11 +72,11 @@ if os.path.exists(DATASET_PATH):
             )
             hash.insert(complaint)
             btree.insert(complaint)
-else:
-    print(f"[ERRO] Dataset não encontrado em {DATASET_PATH}")
+            dlinked_list.insert(complaint)
 
-hash.print_all()
 
+#hash.print_all()
 btree.print_all()
+#dlinked_list.print_all()
 
 
