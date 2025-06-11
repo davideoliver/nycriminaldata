@@ -469,8 +469,7 @@ def main_structures():
 
 def main_problem():
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("Esta seção é dedicada a restrições e limitações.")
-    print("Aqui você pode definir restrições para as operações.")
+    print("Esta seção é dedicada a resolução de um problema com uma estrutura de dados.")
     print("1. Ordenar reclamações por data")
     print("0. Voltar ao menu principal")
     choice = input("Digite sua escolha: ")
@@ -504,7 +503,7 @@ def main_problem():
                 atual = prox
 
             print(f"\n{removidos} reclamações removidas que não pertencem ao grupo de idade '{grupo_idade}'.")
-            if atual.len() == 0:
+            if dlinked_list.head is None:
                 print("Nenhum suspeito encontrado com os parâmetros fornecidos.")
             os.system('pause')
 
@@ -557,7 +556,7 @@ def main_problem():
                 atual = prox
 
             print(f"\n{removidos} reclamações removidas que não pertencem à raça '{grupo_raca}'.")
-            if atual.len() == 0:
+            if dlinked_list.head is None:
                 print("Nenhum suspeito encontrado com os parâmetros fornecidos.")
             os.system('pause')
         
@@ -605,7 +604,7 @@ def main_problem():
                 atual = prox
 
             print(f"\n{removidos} reclamações removidas que não pertencem à raça '{grupo_sexo}'.")
-            if atual.len() == 0:
+            if dlinked_list.head is None:
                 print("Nenhum suspeito encontrado com os parâmetros fornecidos.")
             os.system('pause')
 
