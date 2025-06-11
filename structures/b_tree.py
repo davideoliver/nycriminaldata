@@ -226,3 +226,49 @@ class BTree:
                 return None
             return _search(node.children[i], k)
         return _search(self.root, cmplnt_num)
+
+    def filter_nulls(self, value):
+        all_complaints = []
+
+        def collect(node):
+            if node:
+                all_complaints.extend(node.values)
+                if not node.leaf:
+                    for child in node.children:
+                        collect(child)
+        collect(self.root)
+
+        if value == "columns":
+            null_counts = {}
+            total = len(all_complaints)
+            for complaint in all_complaints:
+                for k, v in vars(complaint).items():
+                    if v is None:
+                        null_counts[k] = null_counts.get(k, 0) + 1
+            to_remove = {k for k, v in null_counts.items() if v / total > 0.5}
+            def remove_fields(node):
+                if node:
+                    for value in node.values:
+                        for k in to_remove:
+                            setattr(value, k, None)
+                    if not node.leaf:
+                        for child in node.children:
+                            remove_fields(child)
+            remove_fields(self.root)
+        elif value == "rows":
+            to_remove = set()
+            for complaint in all_complaints:
+                if any(v is None for v in vars(complaint).values()):
+                    to_remove.add(complaint.CMPLNT_NUM)
+            for cmplnt_num in to_remove:
+                self.remove(cmplnt_num)
+        # Always return the current list after filtering
+        result = []
+        def collect_again(node):
+            if node:
+                result.extend(node.values)
+                if not node.leaf:
+                    for child in node.children:
+                        collect_again(child)
+        collect_again(self.root)
+        return result

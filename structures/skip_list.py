@@ -102,3 +102,41 @@ class SkipList:
     def search_by_id(self, cmplnt_num):
         """Busca uma reclamação pelo número CMPLNT_NUM."""
         return self.get(cmplnt_num)
+    
+    def filter_nulls(self, value):
+        # Coleta todos os ComplaintData
+        complaints = []
+        current = self.header.forward[0]
+        while current:
+            complaints.append(current.value)
+            current = current.forward[0]
+
+        if value == "columns":
+            null_counts = {}
+            total = len(complaints)
+            for complaint in complaints:
+                for k, v in vars(complaint).items():
+                    if v is None:
+                        null_counts[k] = null_counts.get(k, 0) + 1
+            to_remove = {k for k, v in null_counts.items() if v / total > 0.5}
+            current = self.header.forward[0]
+            while current:
+                for k in to_remove:
+                    setattr(current.value, k, None)
+                current = current.forward[0]
+        elif value == "rows":
+            current = self.header.forward[0]
+            to_remove = []
+            while current:
+                if any(v is None for v in vars(current.value).values()):
+                    to_remove.append(current.key)
+                current = current.forward[0]
+            for key in to_remove:
+                self.remove(key)
+        # Always return the current list after filtering
+        result = []
+        current = self.header.forward[0]
+        while current:
+            result.append(current.value)
+            current = current.forward[0]
+        return result
