@@ -9,7 +9,7 @@ and basing on the header doubly_linkedlist.h and doubly_linkedlist.cpp
 #include <string>
 #include "doubly_linkedlist.h"
 #include <cctype>
-#include "hash_table.h"
+#include "chash_table.h"
 #include "b_tree.h"
 #include "skip_list.h"
 

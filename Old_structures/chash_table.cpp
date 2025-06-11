@@ -1,19 +1,19 @@
-#include "hash_table.h"
+#include "chash_table.h"
 #include <iostream>
 #include <functional>
 
-HashTable::HashTable(size_t size) : size_(size) {
+cHashTable::HashTable(size_t size) : size_(size) {
     table_.resize(size_);
 }
 
-HashTable::~HashTable() {}
+cHashTable::~HashTable() {}
 
-size_t HashTable::hash(const std::string& key) const {
+size_t cHashTable::hash(const std::string& key) const {
     std::hash<std::string> hasher;
     return hasher(key) % size_;
 }
 
-void HashTable::insert(const ComplaintData& data) {
+void cHashTable::insert(const ComplaintData& data) {
     size_t idx = hash(data.CMPLNT_NUM);
     for (auto& entry : table_[idx]) {
         if (entry.CMPLNT_NUM == data.CMPLNT_NUM) {
@@ -24,7 +24,7 @@ void HashTable::insert(const ComplaintData& data) {
     table_[idx].push_back(data);
 }
 
-ComplaintData* HashTable::get(const std::string& complaintNumber) {
+ComplaintData* cHashTable::get(const std::string& complaintNumber) {
     size_t idx = hash(complaintNumber);
     for (auto& entry : table_[idx]) {
         if (entry.CMPLNT_NUM == complaintNumber) {
@@ -34,7 +34,7 @@ ComplaintData* HashTable::get(const std::string& complaintNumber) {
     return nullptr;
 }
 
-bool HashTable::remove(const std::string& complaintNumber) {
+bool cHashTable::remove(const std::string& complaintNumber) {
     size_t idx = hash(complaintNumber);
     auto& chain = table_[idx];
     for (auto it = chain.begin(); it != chain.end(); ++it) {
@@ -46,7 +46,7 @@ bool HashTable::remove(const std::string& complaintNumber) {
     return false;
 }
 
-void HashTable::print() const {
+void cHashTable::print() const {
     for (size_t i = 0; i < size_; ++i) {
         if (!table_[i].empty()) {
             std::cout << "Index " << i << ":\n";

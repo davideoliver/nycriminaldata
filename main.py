@@ -3,12 +3,16 @@ import sys
 import os
 import csv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'structures')))
+from hash_table import hashTable
 from b_tree import BTree  # importa a classe BTree pronta
 from complaint_data import ComplaintData
 
+# Caminho para o dataset
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complaint_Data_Historic.csv')
 
+hash = hashTable()
 btree = BTree(t=3)  # inicializa com grau mínimo 3 (pode ajustar)
+
 
 def safe_int(val):
     try:
@@ -22,10 +26,12 @@ def safe_float(val):
     except (ValueError, TypeError):
         return 0.0
 
+# Carregar dados do CSV e inserir no registry
 if os.path.exists(DATASET_PATH):
     with open(DATASET_PATH, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
+            # Adaptar os campos conforme o dataclass ComplaintData
             complaint = ComplaintData(
                 CMPLNT_NUM=row.get('CMPLNT_NUM', ''),
                 CMPLNT_FR_DT=row.get('CMPLNT_FR_DT', ''),
@@ -63,8 +69,13 @@ if os.path.exists(DATASET_PATH):
                 VIC_RACE=row.get('VIC_RACE', ''),
                 VIC_SEX=row.get('VIC_SEX', '')
             )
+            hash.insert(complaint)
             btree.insert(complaint)
 else:
     print(f"[ERRO] Dataset não encontrado em {DATASET_PATH}")
 
+hash.print_all()
+
 btree.print_all()
+
+
