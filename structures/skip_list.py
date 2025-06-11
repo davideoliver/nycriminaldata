@@ -94,6 +94,9 @@ class SkipList:
             return
         print("=== Lista completa de reclamações (Skip List) ===")
         while current:
-            print(f"Complaint #{current.key}: {current.value.OFNS_DESC}")
+            print(f"Complaint #{current.key}:")
+            for key, value in vars(current.value).items():
+                print(f"  {key}: {value}")
+            print("-----------------------------")
             current = current.forward[0]
-        print("================================================")
+        print("====================================")

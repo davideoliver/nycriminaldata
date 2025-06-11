@@ -195,13 +195,18 @@ class BTree:
 
     def print_all(self):
         def _print_node(node, level=0):
-            print(f"{'  '*level}Nó (nível {level}):")
             for key, value in zip(node.keys, node.values):
-                print(f"{'  '*(level+1)}{key}: {value.OFNS_DESC}")
+                print(f"{'  '*level}Complaint #{key}:")
+                for attr, val in vars(value).items():
+                    print(f"{'  '*(level+1)}{attr}: {val}")
+                print(f"{'  '*level}" + "-"*30)
             if not node.leaf:
                 for child in node.children:
                     _print_node(child, level + 1)
+
         if self.root:
+            print("=== Lista completa de reclamações (Árvore B) ===")
             _print_node(self.root)
+            print("===============================================")
         else:
             print("[INFO] Árvore vazia")
