@@ -350,13 +350,152 @@ def main_problem():
         dlinked_list.print_sorted_by_date()
         os.system('pause')
         print("================================================")
-        print("Digite o número correspondente ao grupo da idade do suspeito:")
+        print("Grupos de Idade dos Suspeitos:")
         print("1. 0-17 anos")
         print("2. 18-24 anos")
         print("3. 25-44 anos")
         print("4. 45-64 anos")
         print("5. 65 anos ou mais")
+        print("6. Desconhecido ou Nulo")
+
+        choice2 = input("Escolha um grupo de idade para filtrar os suspeitos a partir do número correspondente: ")
+
+        def remover_por_grupo_idade(grupo_idade):
+            grupo_idade = grupo_idade.strip().upper()
+            atual = dlinked_list.head
+            removidos = 0
+
+            while atual:
+                prox = atual.next  # guarda o próximo para não perder o ponteiro
+                if (atual.data.SUSP_AGE_GROUP.strip().upper() != grupo_idade) and not (grupo_idade == "UNKNOWN" and (atual.data.SUSP_AGE_GROUP.strip() == None or atual.data.SUSP_AGE_GROUP.strip() == '' or atual.data.SUSP_AGE_GROUP.strip() == '(null)')):
+                    dlinked_list.remove_by_id(atual.data.CMPLNT_NUM)
+                    removidos += 1
+                atual = prox
+
+            print(f"\n{removidos} reclamações removidas que não pertencem ao grupo de idade '{grupo_idade}'.")
+            if atual.len() == 0:
+                print("Nenhum suspeito encontrado com os parâmetros fornecidos.")
+            os.system('pause')
+
+        if choice2 == '1':
+            print("Suspeitos com idade entre 0-17 anos:")
+            remover_por_grupo_idade("<18")
+        elif choice2 == '2':
+            print("Suspeitos com idade entre 18-24 anos:")
+            remover_por_grupo_idade("18-24")
+        elif choice2 == '3':
+            print("Suspeitos com idade entre 25-44 anos:")
+            remover_por_grupo_idade("25-44")
+        elif choice2 == '4':
+            print("Suspeitos com idade entre 45-64 anos:")
+            remover_por_grupo_idade("45-64")
+        elif choice2 == '5':
+            print("Suspeitos com 65 anos ou mais:")
+            remover_por_grupo_idade("65+")
+        elif choice2 == '6':
+            print("Suspeitos com idade desconhecida ou nula:")
+            remover_por_grupo_idade("UNKNOWN")
+        else:
+            print("Opção inválida.")
+            os.system('pause')
+            main_problem()
         
+        dlinked_list.print_sorted_by_date()
+
+        print("================================================")
+        print("Raça do Suspeito:")
+        print("1. Branco")
+        print("2. Negro")
+        print("3. Branco Hispânico")
+        print("4. Negro Hispânico")
+        print("5. Asiático")
+        print("6. Desconhecido ou Nulo")
+
+        choice3 = input("Escolha a raça do suspeito para filtrar os suspeitos a partir do número correspondente: ")
+
+        def remover_por_grupo_raca(grupo_raca):
+            grupo_raca = grupo_raca.strip().upper()
+            atual = dlinked_list.head
+            removidos = 0
+
+            while atual:
+                prox = atual.next  # guarda o próximo para não perder o ponteiro
+                if (atual.data.SUSP_RACE.strip().upper() != grupo_raca) and not (grupo_raca == "UNKNOWN" and (atual.data.SUSP_RACE.strip() == None or atual.data.SUSP_RACE.strip() == '' or atual.data.SUSP_RACE.strip() == '(null)')):
+                    dlinked_list.remove_by_id(atual.data.CMPLNT_NUM)
+                    removidos += 1
+                atual = prox
+
+            print(f"\n{removidos} reclamações removidas que não pertencem à raça '{grupo_raca}'.")
+            if atual.len() == 0:
+                print("Nenhum suspeito encontrado com os parâmetros fornecidos.")
+            os.system('pause')
+        
+        if choice3 == '1':
+            print("Suspeitos com raça Branco:")
+            remover_por_grupo_idade("WHITE")
+        elif choice3 == '2':
+            print("Suspeitos com raça Negro:")
+            remover_por_grupo_idade("BLACK")
+        elif choice3== '3':
+            print("Suspeitos com raça Branco Hispânico:")
+            remover_por_grupo_idade("WHITE HISPANIC")
+        elif choice3 == '4':
+            print("Suspeitos com raça Negro Hispânico:")
+            remover_por_grupo_idade("BLACK HISPANIC")
+        elif choice3 == '5':
+            print("Suspeitos com raça Asiático:")
+            remover_por_grupo_raca("ASIAN / PACIFIC ISLANDER")
+        elif choice3 == '6':
+            print("Suspeitos com raça desconhecida ou nula:")
+            remover_por_grupo_raca("UNKNOWN")
+        else:
+            print("Opção inválida.")
+            os.system('pause')
+            main_problem()
+
+        dlinked_list.print_sorted_by_date()
+
+        print("================================================")
+        print("Sexo do Suspeito:")
+        print("1. Masculino")
+        print("2. Feminino")
+        print("3. Desconhecido ou Nulo")
+
+        def remover_por_grupo_sexo(grupo_sexo):
+            grupo_sexo = grupo_sexo.strip().upper()
+            atual = dlinked_list.head
+            removidos = 0
+
+            while atual:
+                prox = atual.next  # guarda o próximo para não perder o ponteiro
+                if (atual.data.SUSP_SEX.strip().upper() != grupo_sexo) and not (grupo_sexo == "UNKNOWN" and (atual.data.SUSP_SEX.strip() == None or atual.data.SUSP_SEX.strip() == '' or atual.data.SUSP_SEX.strip() == '(null)')):
+                    dlinked_list.remove_by_id(atual.data.CMPLNT_NUM)
+                    removidos += 1
+                atual = prox
+
+            print(f"\n{removidos} reclamações removidas que não pertencem à raça '{grupo_sexo}'.")
+            if atual.len() == 0:
+                print("Nenhum suspeito encontrado com os parâmetros fornecidos.")
+            os.system('pause')
+
+        choice4 = input("Escolha a raça do suspeito para filtrar os suspeitos a partir do número correspondente: ")
+
+        if choice4 == '1':
+            print("Suspeitos com sexo Masculino:")
+            remover_por_grupo_sexo("M")
+        elif choice4 == '2':
+            print("Suspeitos com sexo Feminino:")
+            remover_por_grupo_sexo("F")
+        elif choice4 == '3':
+            print("Suspeitos com sexo Nulo ou Desconhecido:")
+            remover_por_grupo_sexo("UNKNOWN")
+        else:
+            print("Opção inválida.")
+            os.system('pause')
+            main_problem()
+
+        dlinked_list.print_sorted_by_date()
+
     elif choice == '0':
         main()
     else:
