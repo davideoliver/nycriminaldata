@@ -6,17 +6,12 @@ class hashTable:
 
     def insert(self, complaint: ComplaintData):
         self.data[complaint.CMPLNT_NUM] = complaint
-        print(f"[DEBUG] Inserido: Complaint #{complaint.CMPLNT_NUM}")
 
     def get(self, complaint_number: str):
         return self.data.get(complaint_number)
 
     def remove(self, complaint_number: str):
         removed = self.data.pop(complaint_number, None) is not None
-        if removed:
-            print(f"[DEBUG] Removido Complaint #{complaint_number}")
-        else:
-            print(f"[DEBUG] Complaint #{complaint_number} não encontrado para remoção")
         return removed
 
     def print_all(self):

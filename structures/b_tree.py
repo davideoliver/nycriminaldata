@@ -62,7 +62,6 @@ class BTreeNode:
                 # Remover da folha direto
                 self.keys.pop(idx)
                 self.values.pop(idx)
-                print(f"[DEBUG] Removido {k} de folha")
             else:
                 #  interno: tem 3 subcasos
                 self.remove_from_internal_node(idx)
