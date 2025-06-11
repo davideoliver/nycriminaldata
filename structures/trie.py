@@ -65,3 +65,45 @@ class Trie:
             print("===========================================")
         else:
             print("[INFO] Árvore Prefixada vazia")
+
+    def filter_nulls(self, value):
+        all_complaints = []
+
+        def collect(node):
+            if node.is_end and node.complaint:
+                all_complaints.append(node.complaint)
+            for child in node.children.values():
+                collect(child)
+        collect(self.root)
+
+        if value == "columns":
+            null_counts = {}
+            total = len(all_complaints)
+            for complaint in all_complaints:
+                for k, v in vars(complaint).items():
+                    if v is None:
+                        null_counts[k] = null_counts.get(k, 0) + 1
+            to_remove = {k for k, v in null_counts.items() if v / total > 0.5}
+            def remove_fields(node):
+                if node.is_end and node.complaint:
+                    for k in to_remove:
+                        setattr(node.complaint, k, None)
+                for child in node.children.values():
+                    remove_fields(child)
+            remove_fields(self.root)
+        elif value == "rows":
+            def remove_nodes(node, prefix=""):
+                if node.is_end and node.complaint and any(v is None for v in vars(node.complaint).values()):
+                    self.remove(prefix)
+                for char, child in node.children.items():
+                    remove_nodes(child, prefix + char)
+            remove_nodes(self.root)
+        # Always return the current list after filtering
+        result = []
+        def collect_again(node):
+            if node.is_end and node.complaint:
+                result.append(node.complaint)
+            for child in node.children.values():
+                collect_again(child)
+        collect_again(self.root)
+        return result

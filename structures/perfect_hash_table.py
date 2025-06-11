@@ -128,3 +128,25 @@ class PerfectHashTable:
                 print(f"  {key}: {value}")
             print("-----------------------------")
         print("======================================================")
+
+    def filter_nulls(self, value):
+        if value == "columns":
+            null_counts = {}
+            total = len(self.data)
+            for complaint in self.data:
+                for k, v in vars(complaint).items():
+                    if v is None:
+                        null_counts[k] = null_counts.get(k, 0) + 1
+            to_remove = {k for k, v in null_counts.items() if v / total > 0.5}
+            for complaint in self.data:
+                for k in to_remove:
+                    setattr(complaint, k, None)
+        elif value == "rows":
+            to_remove = []
+            for complaint in self.data:
+                if any(v is None for v in vars(complaint).values()):
+                    to_remove.append(complaint.CMPLNT_NUM)
+            for cmplnt_num in to_remove:
+                self.remove(cmplnt_num)
+        # Always return the current list after filtering
+        return list(self.data)

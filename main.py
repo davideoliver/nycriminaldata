@@ -104,17 +104,6 @@ def main_individual(id):
                 if id == 3: skiplist.insert(complaint)
                 if id == 4: trie.insert(complaint)
 
-    # Permite pular para esta função diretamente ao final do código
-    if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "individual":
-        # Exemplo de uso: python main.py individual <id>
-        try:
-            structure_id = int(sys.argv[2]) if len(sys.argv) > 2 else 0
-            main_individual(structure_id)
-            sys.exit(0)
-        except Exception as e:
-            print(f"Erro ao iniciar main_individual: {e}")
-            sys.exit(1)
-
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Esta seção é dedicada a operações individuais. Você escolheu a estrutura: ", structures[id])
     print("O que você gostaria de fazer?")
@@ -236,23 +225,27 @@ def main_individual(id):
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Filtragem e ordenação das reclamações\n")
             print("Escolha uma opção:")
-            print("1. Filtragem de reclamações com campos nulos")
+            print("1. Filtragem de reclamações com nulos")
             print("2. Ordenação das reclamações por número de identificação")
             sub_choice = input("Escolha uma opção: ")
             if sub_choice == '1':
-                print("Reclamações com campos nulos:")
+                print("Você gostaria de eliminar campos com mais da metade de nulos? Ou  de eliminar reclamações inteiras que contenham nulos?")
+                value = input("Digite 'colums' para eliminar campos nulos ou 'rows' para eliminar reclamações com nulos: ").strip().lower()
                 if id == 0:
-                    results = dlinked_list.filter_nulls()
+                    results = dlinked_list.filter_nulls(value)
                 elif id == 1:
-                    results = hash.filter_nulls()
+                    results = hash.filter_nulls(value)
                 elif id == 2:
-                    results = btree.filter_nulls()
+                    results = btree.filter_nulls(value)
                 elif id == 3:
-                    results = skiplist.filter_nulls()
+                    results = skiplist.filter_nulls(value)
                 elif id == 4:
-                    results = trie.filter_nulls()
-                for r in results:
-                    print(r)
+                    results = trie.filter_nulls(value)
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("Filtragem concluída.")
+                os.system('pause')
+                os.system('cls' if os.name == 'nt' else 'clear')
+                main_individual(id)
             elif sub_choice == '2':
                 print("Reclamações ordenadas por número de identificação:")
                 if id == 0:

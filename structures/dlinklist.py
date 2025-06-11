@@ -159,3 +159,49 @@ class DoublyLinkedList:
         while current:
             print(current.data)
             current = current.next
+
+    def filter_nulls(self, value):
+        # Coleta todos os dados
+        all_data = []
+        current = self.head
+        while current:
+            all_data.append(current.data)
+            current = current.next
+
+        if value == "columns":
+            # Conta nulos por campo
+            null_counts = {}
+            total = len(all_data)
+            for data in all_data:
+                for k, v in (data.items() if isinstance(data, dict) else vars(data).items()):
+                    if v is None:
+                        null_counts[k] = null_counts.get(k, 0) + 1
+            # Campos a remover
+            to_remove = {k for k, v in null_counts.items() if v / total > 0.5}
+            # Remove campos dos objetos
+            current = self.head
+            while current:
+                if isinstance(current.data, dict):
+                    for k in to_remove:
+                        current.data.pop(k, None)
+                else:
+                    for k in to_remove:
+                        setattr(current.data, k, None)
+                current = current.next
+        elif value == "rows":
+            # Remove nós com qualquer valor nulo
+            current = self.head
+            while current:
+                data = current.data
+                has_null = any(v is None for v in (data.values() if isinstance(data, dict) else vars(data).values()))
+                next_node = current.next
+                if has_null:
+                    self.remove_by_id(getattr(data, 'CMPLNT_NUM', data.get('CMPLNT_NUM', None)))
+                current = next_node
+        # Always return the current list after filtering
+        result = []
+        current = self.head
+        while current:
+            result.append(current.data)
+            current = current.next
+        return result
