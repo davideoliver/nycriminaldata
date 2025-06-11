@@ -8,6 +8,7 @@ from hash_table import hashTable # importa a classe hashTable pronta
 from b_tree import BTree  # importa a classe BTree pronta
 from skip_list import SkipList 
 from dlinklist import DLinkedList  # importa a lista duplamente encadeada
+from trie import Trie  # importa a classe Trie pronta
 
 # Caminho para o dataset
 DATASET_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'NYPD_Complaint_Data_Historic.csv')
@@ -16,6 +17,7 @@ hash = hashTable() # inicializa a tabela hash
 btree = BTree(t=3)  # inicializa com grau mínimo 3 (pode ajustar)
 skiplist = SkipList() # inicializa a skip list
 dlinked_list = DLinkedList()  # inicializa a lista duplamente encadeada
+trie = Trie()
 
 def safe_int(val):
     try:
@@ -76,11 +78,13 @@ if os.path.exists(DATASET_PATH):
             btree.insert(complaint)
             skiplist.insert(complaint)
             dlinked_list.insert(complaint)
+            trie.insert(complaint)
 
 #dlinked_list.print_all()
 #hash.print_all()
 #btree.print_all()
 #skiplist.print_all()
+# trie.print_all()
 
 print("Bem vindo ao sistema de gerenciamento de reclamações da NYPD")
 
@@ -114,7 +118,8 @@ while True:
         hash.print_all()
         btree.print_all()
         skiplist.print_all()
-        dlinked_list.print_all()
+        dlinked_list.print_all()3
+        trie.print_all()
     
     elif choice == '4':
         print("Saindo do sistema...")

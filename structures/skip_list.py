@@ -37,7 +37,6 @@ class SkipList:
 
         if current and current.key == key:
             current.value = complaint  # Atualiza se já existe
-            print(f"[DEBUG] Atualizado: Complaint #{key}")
         else:
             new_level = self._random_level()
             if new_level > self.level:
@@ -49,7 +48,6 @@ class SkipList:
             for i in range(new_level + 1):
                 new_node.forward[i] = update[i].forward[i]
                 update[i].forward[i] = new_node
-            print(f"[DEBUG] Inserido: Complaint #{key} (nível {new_level})")
 
     def get(self, key):
         current = self.header
@@ -81,7 +79,6 @@ class SkipList:
 
             while self.level > 0 and self.header.forward[self.level] is None:
                 self.level -= 1
-            print(f"[DEBUG] Removido: Complaint #{key}")
             return True
         else:
             print(f"[DEBUG] Complaint #{key} não encontrado para remoção")

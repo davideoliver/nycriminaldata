@@ -19,7 +19,6 @@ class DLinkedList:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
-        print(f"[DEBUG] Inserido: Complaint #{complaint.CMPLNT_NUM}")
 
     def search(self, complaint_number: str):
         current = self.head
@@ -41,10 +40,8 @@ class DLinkedList:
                     current.next.prev = current.prev
                 else:
                     self.tail = current.prev
-                print(f"[DEBUG] Removido Complaint #{complaint_number}")
                 return True
             current = current.next
-        print(f"[DEBUG] Complaint #{complaint_number} não encontrado para remoção")
         return False
 
     def print_all(self):
