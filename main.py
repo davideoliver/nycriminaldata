@@ -325,8 +325,78 @@ def main_problem():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Esta seção é dedicada a restrições e limitações.")
     print("Aqui você pode definir restrições para as operações.")
-    # Aqui você pode implementar as restrições
-    print("Restrições ainda não implementadas.")
+    print("1. Ordenar reclamações por data")
+    print("0. Voltar ao menu principal")
+    choice = input("Digite sua escolha: ")
+    if choice == '1':
+        if dlinked_list.head is None:
+            carregarDados(0)  # Carrega os dados se a lista estiver vazia
+        print("Reclamações ordenadas por data:")
+        dlinked_list.print_sorted_by_date()
+        os.system('pause')
+        print("================================================")
+        print("Digite o número correspondente ao grupo da idade do suspeito:")
+        print("1. 0-17 anos")
+        print("2. 18-24 anos")
+        print("3. 25-44 anos")
+        print("4. 45-64 anos")
+        print("5. 65 anos ou mais")
+        
+    elif choice == '0':
+        main()
+    else:
+        print("Opção inválida.")
+        os.system('pause')
+        main_problem()
+
+def carregarDados(id):
+    if os.path.exists(DATASET_PATH) and m == 0:
+        with open(DATASET_PATH, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                # Adaptar os campos conforme o dataclass ComplaintData
+                complaint = ComplaintData(
+                    CMPLNT_NUM=row.get('CMPLNT_NUM', ''),
+                    CMPLNT_FR_DT=row.get('CMPLNT_FR_DT', ''),
+                    CMPLNT_FR_TM=row.get('CMPLNT_FR_TM', ''),
+                    CMPLNT_TO_DT=row.get('CMPLNT_TO_DT', ''),
+                    CMPLNT_TO_TM=row.get('CMPLNT_TO_TM', ''),
+                    ADDR_PCT_CD=safe_int(row.get('ADDR_PCT_CD', 0)),
+                    RPT_DT=row.get('RPT_DT', ''),
+                    KY_CD=safe_int(row.get('KY_CD', 0)),
+                    OFNS_DESC=row.get('OFNS_DESC', ''),
+                    PD_CD=safe_int(row.get('PD_CD', 0)),
+                    PD_DESC=row.get('PD_DESC', ''),
+                    CRM_ATPT_CPTD_CD=row.get('CRM_ATPT_CPTD_CD', ''),
+                    LAW_CAT_CD=row.get('LAW_CAT_CD', ''),
+                    BORO_NM=row.get('BORO_NM', ''),
+                    LOC_OF_OCCUR_DESC=row.get('LOC_OF_OCCUR_DESC', ''),
+                    PREM_TYP_DESC=row.get('PREM_TYP_DESC', ''),
+                    JURIS_DESC=row.get('JURIS_DESC', ''),
+                    JURISDICTION_CODE=safe_int(row.get('JURISDICTION_CODE', 0)),
+                    PARKS_NM=row.get('PARKS_NM', ''),
+                    HADEVELOPT=row.get('HADEVELOPT', ''),
+                    HOUSING_PSA=row.get('HOUSING_PSA', ''),
+                    X_COORD_CD=safe_int(row.get('X_COORD_CD', 0)),
+                    Y_COORD_CD=safe_int(row.get('Y_COORD_CD', 0)),
+                    SUSP_AGE_GROUP=row.get('SUSP_AGE_GROUP', ''),
+                    SUSP_RACE=row.get('SUSP_RACE', ''),
+                    SUSP_SEX=row.get('SUSP_SEX', ''),
+                    TRANSIT_DISTRICT=safe_int(row.get('TRANSIT_DISTRICT', 0)),
+                    Latitude=safe_float(row.get('Latitude', 0.0)),
+                    Longitude=safe_float(row.get('Longitude', 0.0)),
+                    Lat_Lon=row.get('Lat_Lon', ''),
+                    PATROL_BORO=row.get('PATROL_BORO', ''),
+                    STATION_NAME=row.get('STATION_NAME', ''),
+                    VIC_AGE_GROUP=row.get('VIC_AGE_GROUP', ''),
+                    VIC_RACE=row.get('VIC_RACE', ''),
+                    VIC_SEX=row.get('VIC_SEX', '')
+                )
+                if id == 0: dlinked_list.insert_at_random(complaint)
+                if id == 1: hash.insert(complaint)
+                if id == 2: btree.insert(complaint)
+                if id == 3: skiplist.insert(complaint)
+                if id == 4: trie.insert(complaint)
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
