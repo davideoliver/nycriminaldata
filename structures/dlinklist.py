@@ -1,6 +1,9 @@
 import pandas as pd
 import random
 
+# Prompt: Created a doubly linked list with a init function siliar to the one present in hash_table,
+# and add the funcitons search insert and remove
+
 class Node:
     def __init__(self, data):
         self.data = data  # data is a dict with all features
@@ -26,7 +29,7 @@ class DoublyLinkedList:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
-
+    # Prompt: create a funciton to insert on a random place
     def insert_at_random(self, data: dict):
         """Insert a node at a random position in the list."""
         new_node = Node(data)
@@ -65,27 +68,23 @@ class DoublyLinkedList:
             if current.next:
                 current.next.prev = new_node
             current.next = new_node
-
-    def insert_after_id(self, id_value, data: dict):
-        current = self.head
-        while current:
-            if current.data.get('id') == id_value:
-                new_node = Node(data)
-                new_node.prev = current
-                new_node.next = current.next
-                if current.next:
-                    current.next.prev = new_node
-                else:
-                    self.tail = new_node
-                current.next = new_node
-                return True
-            current = current.next
-        return False
+            
+    def insert_at_beginning(self, data: dict):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
 
     def remove_by_id(self, id_value):
         current = self.head
         while current:
-            if current.data.get('id') == id_value:
+            data = current.data
+            # Suporta dict ou objeto ComplaintData
+            cmplnt_num = data.get('CMPLNT_NUM') if isinstance(data, dict) else getattr(data, 'CMPLNT_NUM', None)
+            if cmplnt_num == id_value:
                 if current.prev:
                     current.prev.next = current.next
                 else:
@@ -101,7 +100,17 @@ class DoublyLinkedList:
     def search_by_id(self, id_value):
         current = self.head
         while current:
-            if current.data.get('id') == id_value:
-                return current.data
+            data = current.data
+            # Suporta dict ou objeto ComplaintData
+            cmplnt_num = data.get('CMPLNT_NUM') if isinstance(data, dict) else getattr(data, 'CMPLNT_NUM', None)
+            if cmplnt_num == id_value:
+                return data
             current = current.next
         return None
+
+    # Prompt: create a function to print all elements in the list    
+    def print_all(self):
+        current = self.head
+        while current:
+            print(current.data)
+            current = current.next

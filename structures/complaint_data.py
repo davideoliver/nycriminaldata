@@ -27,7 +27,7 @@ class ComplaintData:
     Y_COORD_CD: int
     SUSP_AGE_GROUP: str
     SUSP_RACE: str
-    SUSP_SEX: str   # char em C++ vira str com tamanho 1 em Python
+    SUSP_SEX: str
     TRANSIT_DISTRICT: int
     Latitude: float
     Longitude: float
@@ -36,4 +36,4 @@ class ComplaintData:
     STATION_NAME: str
     VIC_AGE_GROUP: str
     VIC_RACE: str
-    VIC_SEX: str    # char em C++ vira str com tamanho 1 em Python
+    VIC_SEX: str

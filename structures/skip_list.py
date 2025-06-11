@@ -97,3 +97,8 @@ class SkipList:
             print("-----------------------------")
             current = current.forward[0]
         print("====================================")
+
+    # Prompt: Create a search by CMPLNT_NUM in skip list
+    def search_by_id(self, cmplnt_num):
+        """Busca uma reclamação pelo número CMPLNT_NUM."""
+        return self.get(cmplnt_num)

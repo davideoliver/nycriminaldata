@@ -209,3 +209,20 @@ class BTree:
             print("===============================================")
         else:
             print("[INFO] Árvore vazia")
+
+    # Prompt: Create a serch by CMPLNT_NUM in b_tree
+
+    def search_by_id(self, cmplnt_num):
+        """Busca uma reclamação pelo número CMPLNT_NUM."""
+        def _search(node, k):
+            if not node:
+                return None
+            i = 0
+            while i < len(node.keys) and k > node.keys[i]:
+                i += 1
+            if i < len(node.keys) and node.keys[i] == k:
+                return node.values[i]
+            if node.leaf:
+                return None
+            return _search(node.children[i], k)
+        return _search(self.root, cmplnt_num)
